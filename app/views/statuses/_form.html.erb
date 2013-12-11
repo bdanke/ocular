@@ -1,0 +1,18 @@
+<% if status.id.nil? %>
+  <% action = statuses_url %>
+  <% method = "post" %>
+  <% button_text = "Post" %>
+<% else %>
+  <% action = status_url(status) %>
+  <% method = "put" %>
+  <% button_text = "Update Status" %>
+<% end %>
+
+<form class="status-form" action="<%= action %>" method="<%= method %>">
+  <input
+    name="authenticity_token"
+    type="hidden"
+    value="<%= form_authenticity_token %>">
+  <textarea placeholder="What's on your mind?" name="status[body]"><% if status.body %><%= status.body %><% end %></textarea>
+  <input class="status-submit-button" type="submit" value="<%= button_text %>">
+</form>

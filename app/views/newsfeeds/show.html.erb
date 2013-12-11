@@ -1,0 +1,18 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: @user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="status-list">
+    <%= render partial: "statuses/form", locals: { status: @status }%>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

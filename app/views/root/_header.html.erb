@@ -1,0 +1,15 @@
+<div class="search-bar">
+  <input type="text" value="Search for...">
+</div>
+
+<div class="signed-in-header-links">
+  <ul>
+    <li><a href="<% user_profile_url(user) %>"><img><%= user.fname %></a></li>
+    <li><a href="<%= root_url %>">Home</a></li>
+    <li><a href="#">Find Friends</a></li>
+    <li><a href="#"><img>Friend Requests</a></li>
+    <li><a href="#"><img>Inbox</a></li>
+    <li><a href="#"><img>Account Settings</a></li>
+    <li><%= button_to "Log Out", session_url, method: "delete", class: "logout-button" %></li>
+  </ul>
+</div>

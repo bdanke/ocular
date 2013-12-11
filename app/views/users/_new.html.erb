@@ -1,0 +1,44 @@
+<div class="signup-content">
+  <h2>Sign Up!</h2>
+  <br>
+  <form action="<%= users_url %>" method="post">
+    <input
+      name="authenticity_token"
+      type="hidden"
+      value="<%= form_authenticity_token %>">
+    <div class="names group">
+      <div class="first-name">
+        <label>First Name:
+          <br>
+          <input class="signup-text-input" type="text" name="user[fname]">
+        </label>
+      </div>
+      <div class="last-name">
+        <label>Last Name:
+          <br>
+          <input class="signup-text-input" type="text" name="user[lname]">
+        </label>
+      </div>
+    </div>
+
+    <label>Email:
+      <br>
+      <input class="signup-text-input" type="text" name="user[email]">
+    </label>
+    <br>
+    <label>Password:
+      <br>
+      <input class="signup-text-input" type="password" name="user[password]">
+    </label>
+    <br>
+    <label>Birthday:
+      <br>
+      <input type="date" name="user[bday]">
+    </lable>
+    <br>
+    <input type="radio" name="user[gender]" value="f">Female</input>
+    <input type="radio" name="user[gender]" value="m">Male</input>
+    <br>
+    <input type="submit" value="Sign Up">
+  </form>
+</div>

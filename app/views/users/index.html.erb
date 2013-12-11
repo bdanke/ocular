@@ -1,0 +1,10 @@
+<% @users.each do |user| %>
+<%= user.name %>
+  <% friendship = Friendship.find_%>
+  <% if current_user.friends.include?(user) %>
+
+    <%= button_to "Unfriend", friendship_url, method: "delete" %>
+  <% else %>
+    <%= button_to "Friend Request", friendship_url, method: "post" %>
+  <% end %>
+<% end %>
