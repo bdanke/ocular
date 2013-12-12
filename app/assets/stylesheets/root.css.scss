@@ -126,7 +126,7 @@ header {
 
 // NEWSFEEDS STYLING
 
-.content {
+.middle-content {
   margin: auto;
   width: 1000px;
   height: 800px;
@@ -171,4 +171,14 @@ header {
   height: 800px;
   float: left;
   background: grey;
+}
+
+// USERS INDEX
+
+.user-list {
+  width: 650px;
+  height: 800px;
+  float: left;
+  background: orange;
+  padding-top: 30px;
 }

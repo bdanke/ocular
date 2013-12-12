@@ -27,5 +27,7 @@ class StatusesController < ApplicationController
   end
 
   def destroy
+    Status.find(params[:id]).destroy
+    redirect_to :back
   end
 end

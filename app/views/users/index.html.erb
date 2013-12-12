@@ -1,10 +1,61 @@
-<% @users.each do |user| %>
-<%= user.name %>
-  <% friendship = Friendship.find_%>
-  <% if current_user.friends.include?(user) %>
+<% friends = current_user.friends %>
+<% pending_request_friends = current_user.pending_request_friends %>
+<% pending_friends = current_user.pending_friends %>
+<% @users.reject! { |user| friends.include?(user) || pending_request_friends.include?(user) } %>
 
-    <%= button_to "Unfriend", friendship_url, method: "delete" %>
-  <% else %>
-    <%= button_to "Friend Request", friendship_url, method: "post" %>
-  <% end %>
-<% end %>
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: @user } %>
+  </div>
+</header>
+
+<div class="middle-content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="user-list">
+    <% unless friends.empty? %>
+      <h3>Friends</h3>
+      <br>
+      <% friends.each do |friend| %>
+        <% friendship = Friendship.find_pair(current_user, friend) %>
+        <br>
+        <%= friend.name %>
+        <br>
+        <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
+      <% end %>
+      <br>
+    <% end %>
+
+    <% unless pending_request_friends.empty? %>
+      <h3>Pending Friend Requests</hr>
+      <% pending_request_friends.each do |pending_request_friend| %>
+        <% friendship = Friendship.find_pair(current_user, pending_friend) %>
+        <br>
+        <%= pending_request_friend.name %>
+        <br>
+        <%= button_to "Delete Friend Request", friendship_url(friendship), method: "delete "%>
+      <% end %>
+      <br>
+    <% end %>
+
+    <% unless @users.empty? %>
+      <h3>Users</h3>
+      <% @users.each do |user| %>
+        <br>
+        <%= user.name %>
+        <br>
+        <% if pending_friends.include?(user) %>
+          <% friendship = Friendship.find_pair(current_user, user) %>
+          <%= button_to "Pending: Cancel Request", friendship_url(friendship), method: "delete" %>
+        <% else %>
+          <%= button_to "Friend Request", user_friendship_url(user), method: "post" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

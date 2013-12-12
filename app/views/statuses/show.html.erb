@@ -1,0 +1,16 @@
+<% owner = User.find(status.owner_id) %>
+
+<div class="status">
+  <img class="status-user-img">
+  <a href="<%= user_profile_url(owner.id) %>">
+    <%= owner.name %>
+  </a>
+  <div class="status-content">
+    <div class="status-body">
+      <%= status.body.html_safe %>
+    </div>
+    <div class="status-links">
+      <a href="<%= status_like_url(status) %>">
+    </div>
+  </div>
+</div>

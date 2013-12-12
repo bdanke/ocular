@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_filter :require_current_user!, :only => [:show]
   before_filter :require_no_current_user!, :only => [:create]
 
+  def index
+    @user = current_user
+    @users = User.all.reject { |user| user == @user }
+    render :index
+  end
+
   def create
     @user = User.new(params[:user])
 
