@@ -1,0 +1,26 @@
+<% owner = User.find(status.owner_id) %>
+<% like = Like.find_by_data(owner.id, "Status", status.id) %>
+<div class="status">
+  <img class="status-user-img">
+  <a href="<%= user_profile_url(owner.id) %>">
+    <%= owner.name %>
+  </a>
+  <div class="status-content">
+    <div class="status-body">
+      <%= status.body.html_safe %>
+    </div>
+    <br>
+    <div class="status-links">
+      <% if like_exists %>
+        <%= link_to "Unlike", controller: "like", action: "destroy", like_id: like.id %>
+      <% else %>
+        <%= link_to "Like", controller: "like", action: "create", object_type: "Status", object_id: status.id %>
+      <% end %>
+    </div>
+    <br>
+    <% status.comments.each do |comment| %>
+      <%= render partial: "comments/show", locals: { comment: comment } %>
+    <% end %>
+    <%= render partial: "comments/form" %>
+  </div>
+</div>

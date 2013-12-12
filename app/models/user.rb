@@ -24,6 +24,18 @@ class User < ActiveRecord::Base
   foreign_key: :in_friend_id,
   primary_key: :id)
 
+  has_many(
+  :statuses,
+  class_name: "Status",
+  foreign_key: :owner_id,
+  primary_key: :id)
+
+  has_many(
+  :likes,
+  class_name: "Like",
+  foreign_key: :owner_id,
+  primary_key: :id)
+
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     return nil if user.nil?
@@ -77,6 +89,20 @@ class User < ActiveRecord::Base
       pending_friends << User.find(id)
     end
     pending_friends
+  end
+
+  def newsfeed_statuses
+    statuses = []
+    select_query = "owner_id = #{self.id}"
+    self.friends.each do |friend|
+      select_query += " OR owner_id = #{friend.id}"
+    end
+    query = <<-END
+    SELECT *
+    FROM status LIMIT 0, 25
+    WHERE #{select_query}
+    END
+    Status.find_by_sql(query)
   end
 
   private

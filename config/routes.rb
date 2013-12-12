@@ -6,8 +6,6 @@ Ocular::Application.routes.draw do
     resource :friendship, only: :create
   end
   resources :friendships, only: [:update, :destroy]
-  resources :statuses, only: [:create, :edit, :update, :destroy] do
-    resource :like, only: [:create, :destroy]
-  end
+  resources :statuses, only: [:create, :edit, :update, :destroy]
   root to: "root#root"
 end
