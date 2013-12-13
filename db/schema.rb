@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131213183902) do
+ActiveRecord::Schema.define(:version => 20131213203813) do
 
   create_table "albums", :force => true do |t|
     t.integer  "owner_id",   :null => false
@@ -56,6 +56,28 @@ ActiveRecord::Schema.define(:version => 20131213183902) do
   add_index "likes", ["object_id"], :name => "index_likes_on_object_id"
   add_index "likes", ["owner_id", "object_type", "object_id"], :name => "index_likes_on_owner_id_and_object_type_and_object_id", :unique => true
   add_index "likes", ["owner_id"], :name => "index_likes_on_owner_id"
+
+  create_table "message_threads", :force => true do |t|
+    t.integer  "sender_id",    :null => false
+    t.integer  "recipient_id", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "message_threads", ["recipient_id"], :name => "index_message_threads_on_recipient_id"
+  add_index "message_threads", ["sender_id", "recipient_id"], :name => "index_message_threads_on_sender_id_and_recipient_id", :unique => true
+  add_index "message_threads", ["sender_id"], :name => "index_message_threads_on_sender_id"
+
+  create_table "messages", :force => true do |t|
+    t.integer  "owner_id",   :null => false
+    t.integer  "thread_id",  :null => false
+    t.text     "body",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "messages", ["owner_id"], :name => "index_messages_on_owner_id"
+  add_index "messages", ["thread_id"], :name => "index_messages_on_thread_id"
 
   create_table "photo_album_links", :force => true do |t|
     t.integer  "photo_id",   :null => false

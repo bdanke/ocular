@@ -60,6 +60,12 @@ class User < ActiveRecord::Base
   foreign_key: :owner_id,
   primary_key: :id)
 
+  has_many(
+  :message_threads,
+  class_name: "MessageThread",
+  foreign_key: :sender_id,
+  primary_key: :id)
+
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     return nil if user.nil?

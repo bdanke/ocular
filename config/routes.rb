@@ -13,6 +13,7 @@ Ocular::Application.routes.draw do
     resource :profile, only: [:new, :create, :edit, :update, :show]
     resource :friendship, only: :create
   end
+  resources :messages, only: [:new, :create]
   resources :photos, only: [:create, :edit, :update, :destroy]
   resources :friendships, only: [:update, :destroy]
   resources :albums, only: [:new, :create]

@@ -25,6 +25,8 @@
           <%= friend.name %>
           <br>
           <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
+          <br>
+          <%= button_to "Send Message", new_message_url, method: :get, recipient_id: friend.id %>
         <% end %>
         <br>
       <% end %>
@@ -41,6 +43,7 @@
           <% else %>
             <%= button_to "Friend Request", user_friendship_url(user), method: "post" %>
           <% end %>
+          <%= button_to "Send Message", new_message_url, method: :get, recipient_id: user.id %>
         <% end %>
       <% end %>
     </div>

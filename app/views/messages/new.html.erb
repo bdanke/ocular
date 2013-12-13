@@ -1,0 +1,46 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: current_user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+    <ul class="messaged-friends-list">
+      <% @messaged_friends.each do |friend| %>
+        <li>
+          <div class="user-img">
+            <%= image_tag friend.profile_img.url(:small) %>
+          </div>
+          <div class="user-name">
+            <a href="<%= user_profile_url(friend) %>">
+              <%= friend.name %>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="middle-content">
+    <% unless @messages.empty? %>
+      <% sender_profile = @sender.profile %>
+      <% recipient_profile = @recipient.profile %>
+      <% @messages.each do |message| %>
+        <div class="message">
+          <% if message.owner_id == @sender.id %>
+            <%= image_tag sender_profile.img.url(:small) %>
+          <% elsif message.owner_id == @recipient.id %>
+            <%= image_tag recipient_profile.img.url(:small) %>
+          <% end %>
+          <%= message.body %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

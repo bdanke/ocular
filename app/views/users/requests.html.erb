@@ -22,6 +22,7 @@
           <br>
           <%= button_to "Accept Friend Request", friendship_url(friendship), method: "put" %>
           <%= button_to "Delete Friend Request", friendship_url(friendship), method: "delete "%>
+          <%= button_to "Send Message", new_message_url, method: :get, recipient_id: pending_request_friend.id %>
         <% end %>
       <% else %>
         <h3>No Friend Requests at this time.</h3>
