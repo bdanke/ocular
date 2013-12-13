@@ -1,7 +1,7 @@
 <% friends = current_user.friends %>
 <% pending_request_friends = current_user.pending_request_friends %>
 <% pending_friends = current_user.pending_friends %>
-<% @users.reject! { |user| friends.include?(user) || pending_request_friends.include?(user) } %>
+<% @users.reject! { |user| friends.include?(user) || pending_request_friends.include?(user) || user == current_user } %>
 
 <header>
   <div class="header-wrapper">

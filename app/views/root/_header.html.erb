@@ -6,7 +6,7 @@
 
 <div class="signed-in-header-links">
   <ul>
-    <li><a href="<% user_profile_url(user) %>"><img><%= user.fname %></a></li>
+    <li><a href="<%= user_profile_url(user) %>"><img><%= user.fname %></a></li>
     <li><a href="<%= root_url %>">Home</a></li>
     <li><a href="<%= users_url %>">Find Friends</a></li>
     <li><a href="<%= requests_users_url %>"><img>Friend Requests</a></li>
