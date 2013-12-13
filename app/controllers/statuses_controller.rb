@@ -1,11 +1,13 @@
 class StatusesController < ApplicationController
+  before_filter :require_current_user!
+  before_filter :require_self_or_friend!
+
   def create
     status = Status.new(params[:status])
     status.owner_id = current_user.id
-    status.wall_user_id = params[:user_id]
-
+    status.wall_user_id = params[:user_id] || current_user.id
     if status.save
-      head :ok
+      redirect_to :back
     else
       render json: status.errors.full_messages
     end

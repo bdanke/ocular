@@ -4,7 +4,7 @@ class Friendship < ActiveRecord::Base
   validates :in_friend_id, :out_friend_id, :pending_flag, presence: true
   validates :in_friend_id, uniqueness: { scope: :out_friend_id }
   validates :out_friend_id, uniqueness: { scope: :in_friend_id }
-  validates :pending_flag, inclusion: { in: [true, false] }
+  validates :pending_flag, inclusion: { in: %w(T F) }
 
   belongs_to(
   :in_friend,

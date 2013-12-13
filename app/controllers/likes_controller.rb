@@ -1,4 +1,7 @@
 class LikesController < ApplicationController
+  before_filter :require_current_user!
+  before_filter :require_self_or_friend!
+
   def create
     like = Like.new()
     like.owner_id = current_user.id

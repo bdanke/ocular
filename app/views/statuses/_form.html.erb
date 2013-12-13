@@ -14,5 +14,6 @@
     type="hidden"
     value="<%= form_authenticity_token %>">
   <textarea placeholder="What's on your mind?" name="status[body]"><% if status.body %><%= status.body %><% end %></textarea>
+  <input type="hidden" name="user_id" value="<%= params[:user_id] %>">
   <input class="status-submit-button" type="submit" value="<%= button_text %>">
 </form>

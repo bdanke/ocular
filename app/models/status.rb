@@ -14,4 +14,13 @@ class Status < ActiveRecord::Base
   class_name: "Like",
   foreign_key: :object_id,
   primary_key: :id)
+
+  def comments
+    query = <<-END
+    SELECT *
+    FROM comments
+    WHERE object_type LIKE 'Status' AND object_id = #{self.id}
+    END
+    Comment.find_by_sql(query)
+  end
 end

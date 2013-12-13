@@ -1,0 +1,21 @@
+<% owner = comment.user %>
+<% like = Like.find_by_data(current_user.id, "Comment", comment.id) %>
+<div class="comment group">
+  <div class="comment-img"></div>
+  <div class="comment-body">
+    <%= link_to "#{owner.name}:", user_profile_url(owner) %>
+    <%= comment.body.html_safe %>
+  </div>
+  <div class="comment-footer group">
+    <ul>
+      <li><%= comment.created_at %></li>
+      <li>
+        <% if like %>
+          <%= link_to "Unlike", likes_url(like_id: like.id), method: :delete %>
+        <% else %>
+          <%= link_to "Like", likes_url( object_type: "Comment", object_id: comment.id), method: :post %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,6 +1,25 @@
 <header>
   <div class="header-wrapper">
     <div class="logo"></div>
-    <%= render partial: "root/header", locals: { user: @user } %>
+    <%= render partial: "root/header", locals: { user: current_user } %>
   </div>
 </header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="status-list">
+      <%= render partial: "statuses/form", locals: { status: @status } %>
+    </div>
+    <div class="wall-posts">
+      <% @user.wall_posts.each do |post| %>
+        <%= render partial: "statuses/show", locals: { status: post }%>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

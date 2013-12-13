@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
-html, body, div, input, h2, h3, h4, a {
+html, body, div, input, h2, h3, h4, ul, li, a {
   margin: 0;
   border: 0;
   padding: 0;

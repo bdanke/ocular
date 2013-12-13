@@ -11,18 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211225646) do
+ActiveRecord::Schema.define(:version => 20131212192307) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "owner_id",    :null => false
+    t.string   "object_type", :null => false
+    t.integer  "object_id",   :null => false
+    t.text     "body",        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "comments", ["object_id"], :name => "index_comments_on_object_id"
+  add_index "comments", ["owner_id"], :name => "index_comments_on_owner_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "in_friend_id",  :null => false
     t.integer  "out_friend_id", :null => false
-    t.boolean  "pending_flag",  :null => false
+    t.string   "pending_flag",  :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "friendships", ["in_friend_id"], :name => "index_friendships_on_in_friend_id"
   add_index "friendships", ["out_friend_id"], :name => "index_friendships_on_out_friend_id"
+
+  create_table "likes", :force => true do |t|
+    t.integer  "owner_id",    :null => false
+    t.string   "object_type", :null => false
+    t.integer  "object_id",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "likes", ["object_id"], :name => "index_likes_on_object_id"
+  add_index "likes", ["owner_id", "object_type", "object_id"], :name => "index_likes_on_owner_id_and_object_type_and_object_id", :unique => true
+  add_index "likes", ["owner_id"], :name => "index_likes_on_owner_id"
 
   create_table "statuses", :force => true do |t|
     t.integer  "owner_id",     :null => false

@@ -36,6 +36,12 @@ class User < ActiveRecord::Base
   foreign_key: :owner_id,
   primary_key: :id)
 
+  has_many(
+  :comments,
+  class_name: "Comment",
+  foreign_key: :owner_id,
+  primary_key: :id)
+
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     return nil if user.nil?
@@ -65,8 +71,8 @@ class User < ActiveRecord::Base
 
   def friends
     friends = []
-    in_friend_ids = (self.in_friendships.select { |friendship| friendship.pending_flag == false }).map { |friendship| friendship.in_friend_id }
-    out_friend_ids = (self.out_friendships.select { |friendship| friendship.pending_flag == false }).map { |friendship| friendship.out_friend_id }
+    in_friend_ids = (self.in_friendships.select { |friendship| friendship.pending_flag == "F" }).map { |friendship| friendship.in_friend_id }
+    out_friend_ids = (self.out_friendships.select { |friendship| friendship.pending_flag == "F" }).map { |friendship| friendship.out_friend_id }
     in_friend_ids.concat(out_friend_ids).each do |id|
       friends << User.find(id)
     end
@@ -75,7 +81,7 @@ class User < ActiveRecord::Base
 
   def pending_request_friends
     pending_friends = []
-    in_friend_ids = (self.in_friendships.select { |friendship| friendship.pending_flag == true }).map { |friendship| friendship.in_friend_id }
+    in_friend_ids = (self.in_friendships.select { |friendship| friendship.pending_flag == "T" }).map { |friendship| friendship.in_friend_id }
     in_friend_ids.each do |id|
       pending_friends << User.find(id)
     end
@@ -84,7 +90,7 @@ class User < ActiveRecord::Base
 
   def pending_friends
     pending_friends = []
-    out_friend_ids = (self.out_friendships.select { |friendship| friendship.pending_flag == true }).map { |friendship| friendship.out_friend_id }
+    out_friend_ids = (self.out_friendships.select { |friendship| friendship.pending_flag == "F" }).map { |friendship| friendship.out_friend_id }
     out_friend_ids.each do |id|
       pending_friends << User.find(id)
     end
@@ -95,12 +101,21 @@ class User < ActiveRecord::Base
     statuses = []
     select_query = "owner_id = #{self.id}"
     self.friends.each do |friend|
-      select_query += " OR owner_id = #{friend.id}"
+      select_query += " OR wall_user_id = #{friend.id}"
     end
     query = <<-END
     SELECT *
-    FROM status LIMIT 0, 25
-    WHERE #{select_query}
+    FROM statuses
+    WHERE #{select_query} LIMIT 25
+    END
+    Status.find_by_sql(query)
+  end
+
+  def wall_posts
+    query = <<-END
+    SELECT *
+    FROM statuses
+    WHERE wall_user_id = #{self.id} LIMIT 25
     END
     Status.find_by_sql(query)
   end

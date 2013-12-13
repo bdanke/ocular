@@ -126,7 +126,7 @@ header {
 
 // NEWSFEEDS STYLING
 
-.middle-content {
+.content {
   margin: auto;
   width: 1000px;
   height: 800px;
@@ -139,7 +139,7 @@ header {
   background: grey;
 }
 
-.status-list {
+.middle-content {
   width: 650px;
   height: 800px;
   float: left;
@@ -181,4 +181,64 @@ header {
   float: left;
   background: orange;
   padding-top: 30px;
+}
+
+// STATUS SHOW PARTIAL
+
+.status {
+  width: 505px;
+  margin-left: 70px;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid black;
+}
+
+.status-body {
+  width: 500px;
+  max-height: 300px;
+  max-width: 500px;
+  background: white;
+}
+
+.comment-list {
+  background: yellow;
+}
+
+// COMMENT FORM
+
+.comment-form {
+  width: 505px;
+}
+
+.comment-submit-data {
+  width: 500px;
+  max-width: 500px;
+}
+
+.submit-comment-button {
+  float: right;
+}
+
+// COMMENT SHOW PARTIAL
+
+.comment {
+  width: 505px;
+}
+
+.comment-body {
+  width: 500px;
+  background: white;
+}
+
+.comment-footer {
+  float: left;
+}
+
+.comment-footer > ul {
+  float: left;
+}
+
+.comment-footer > ul > li {
+  float: left;
+  margin-right: 20px;
 }

@@ -3,15 +3,15 @@ class FriendshipsController < ApplicationController
     friendship = Friendship.new()
     friendship.in_friend_id = current_user.id
     friendship.out_friend_id = params[:user_id]
-    friendship.pending_flag = true
+    friendship.pending_flag = "T"
     friendship.save!
     redirect_to :back
   end
 
   def update
-    friendship = Friendship.find(param[:id])
-    friendship.pending_flag = false
-    frienship.save!
+    friendship = Friendship.find(params[:id])
+    friendship.pending_flag = "F"
+    friendship.save!
     redirect_to :back
   end
 

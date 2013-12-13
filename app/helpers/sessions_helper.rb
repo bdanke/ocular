@@ -24,4 +24,8 @@ module SessionsHelper
   def require_no_current_user!
     redirect_to user_url(current_user) unless current_user.nil?
   end
+
+  def require_self_or_friend!
+    redirect_to :back unless params[:user_id].to_i == current_user.id || (current_user.friends.map { |friend| friend.id }).include?(params[:user_id].to_i)
+  end
 end

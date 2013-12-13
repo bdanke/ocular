@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :require_current_user!, :only => [:show]
-  before_filter :require_no_current_user!, :only => [:create]
-
+  before_filter :require_current_user!, except: :create
+  before_filter :require_no_current_user!, only: :create
+  # before_filter :require_self!, only: :requests
   def index
     @user = current_user
     @users = User.all.reject { |user| user == @user }
@@ -21,8 +21,15 @@ class UsersController < ApplicationController
 
   def newsfeed
     @user = current_user
+    render :show
   end
 
   def profile
+
+  end
+
+  def requests
+    @user = User.new()
+    render :requests
   end
 end

@@ -1,0 +1,34 @@
+<% pending_request_friends = current_user.pending_request_friends %>
+
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: @user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="user-list">
+      <% unless pending_request_friends.empty? %>
+        <h3>Pending Friend Requests</hr>
+        <% pending_request_friends.each do |pending_request_friend| %>
+          <% friendship = Friendship.find_pair(current_user, pending_request_friend) %>
+          <br>
+          <%= pending_request_friend.name %>
+          <br>
+          <%= button_to "Accept Friend Request", friendship_url(friendship), method: "put" %>
+          <%= button_to "Delete Friend Request", friendship_url(friendship), method: "delete "%>
+        <% end %>
+      <% else %>
+        <h3>No Friend Requests at this time.</h3>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

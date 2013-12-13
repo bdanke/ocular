@@ -1,5 +1,5 @@
 <% owner = User.find(status.owner_id) %>
-<% like = Like.find_by_data(owner.id, "Status", status.id) %>
+<% like = Like.find_by_data(current_user.id, "Status", status.id) %>
 <div class="status">
   <img class="status-user-img">
   <a href="<%= user_profile_url(owner.id) %>">
@@ -9,18 +9,21 @@
     <div class="status-body">
       <%= status.body.html_safe %>
     </div>
-    <br>
     <div class="status-links">
-      <% if like_exists %>
-        <%= link_to "Unlike", controller: "like", action: "destroy", like_id: like.id %>
+      <% if like %>
+        <%= link_to "Unlike", likes_url(like_id: like.id), method: :delete %>
       <% else %>
-        <%= link_to "Like", controller: "like", action: "create", object_type: "Status", object_id: status.id %>
+        <%= link_to "Like", likes_url( object_type: "Status", object_id: status.id), method: :post %>
       <% end %>
     </div>
     <br>
-    <% status.comments.each do |comment| %>
-      <%= render partial: "comments/show", locals: { comment: comment } %>
-    <% end %>
-    <%= render partial: "comments/form" %>
+    <div class="comment-list">
+      <h3>Comments</h3>
+      <% status.comments.each do |comment| %>
+        <%= render partial: "comments/show", locals: { comment: comment } %>
+        <br>
+      <% end %>
+      <%= render partial: "comments/form", locals: { object: status } %>
+    </div>
   </div>
 </div>

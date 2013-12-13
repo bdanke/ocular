@@ -3,7 +3,7 @@ class Like < ActiveRecord::Base
 
   validates :owner_id, :object_type, :object_id, presence: true
   validates :owner_id, uniqueness: { scope: [:object_type, :object_id] }
-  validates :object_type, inclusion: { in: %w(Status) }
+  validates :object_type, inclusion: { in: %w(Status Comment) }
 
   belongs_to(
   :user,
@@ -15,9 +15,9 @@ class Like < ActiveRecord::Base
     query = <<-END
     SELECT *
     FROM likes
-    WHERE owner_id = #{owner_id} AND object_type = #{object_type} AND object_id = #{object_id}
+    WHERE owner_id = #{owner_id} AND object_type LIKE '#{object_type}' AND object_id = #{object_id}
     END
 
-    Like.find_by_sql(query)
+    Like.find_by_sql(query).first
   end
 end
