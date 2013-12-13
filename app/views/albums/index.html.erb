@@ -1,0 +1,51 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: current_user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="album-header group">
+      <% if @user == current_user %>
+        <div class="photo-upload-form">
+          <%= render partial: "photos/form" %>
+        </div>
+        <div class="album-button">
+          <%= button_to "Create Album", new_album_url, method: :get %>
+        </div>
+      <% end %>
+    </div>
+    <div class="albums">
+      <% if @photo %>
+        <ul>
+          <li>
+            <a href="<%= user_photos_url(@user) %>">
+              <figure>
+                <figcaption>All Photos</figcaption>
+                <%= image_tag @photo.img.url(:big) %>
+              </figure>
+            </a>
+          </li>
+          <% @user.albums.each do |album| %>
+            <li>
+              <a href="<%= user_album_url(@user, album) %>">
+                <figure>
+                  <figcaption><%= album.title %></figcaption>
+                  <%= image_tag album.photos.first.img.url(:big) %>
+                </figure>
+              <a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

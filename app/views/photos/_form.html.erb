@@ -1,0 +1,12 @@
+<form class="photo-form" action="<%= photos_url %>" nctype="multipart/form-data" method="post">
+  <input
+    name="authenticity_token"
+    type="hidden"
+    value="<%= form_authenticity_token %>">
+  <input type="file" name="photo[img]">
+  <br>
+  <label for="photo-caption">Optional Caption:</label>
+  <input type="text" name="photo[caption]" id="photo-caption">
+  <br>
+  <input type="submit" value="Upload Photo!">
+</form>

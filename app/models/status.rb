@@ -20,6 +20,7 @@ class Status < ActiveRecord::Base
     SELECT *
     FROM comments
     WHERE object_type LIKE 'Status' AND object_id = #{self.id}
+    ORDER BY created_at
     END
     Comment.find_by_sql(query)
   end

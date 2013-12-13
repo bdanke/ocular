@@ -1,0 +1,67 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: current_user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="album-form">
+      <form action="<%= albums_url %>" method="post">
+        <input
+          name="authenticity_token"
+          type="hidden"
+          value="<%= form_authenticity_token %>">
+        <label>Album Title:
+        <br>
+        <input type="text" name="album[title]">
+        </label>
+        <br>
+        <h3>Add Photos to Album:</h3>
+        <br>
+        <% @photos.each do |photo| %>
+          <input type="checkbox" name="album[photo_ids][]" id="<%= 'photo-#{photo.id}' %>" value="<%= photo.id %>">
+          <label for="<%= 'photo-#{photo.id}' %>">
+            <figure>
+              <figcaption><%= photo.caption %></figcaption>
+              <%= image_tag photo.img.url(:big) %>
+            </figure>
+        <% end %>
+        <input type="submit" value="Create Album">
+      </form>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>
+
+
+
+
+
+
+
+<form action="<%= albums_url %>" method="post">
+  <input
+    name="authenticity_token"
+    type="hidden"
+    value="<%= form_authenticity_token %>">
+  <input type="text" name="album[title]">
+  <br>
+  <h3>Add Photos to Album:</h3>
+  <br>
+  <% current_user.photos.each do |photo| %>
+    <input type="checkbox" name="album[photo_ids][]" id="<%= 'photo-#{photo.id}' %>" value="<%= photo.id %>">
+    <label for="<%= 'photo-#{photo.id}' %>">
+      <figure>
+        <figcaption><%= photo.caption %></figcaption>
+        <%= image_tag photo.img.url(:big) %>
+      </figure>
+  <% end %>
+  <input type="submit" value="Create Album">
+</form>

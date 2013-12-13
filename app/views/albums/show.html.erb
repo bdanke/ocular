@@ -1,0 +1,30 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: current_user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="photos">
+      <h3><%= @album.title %></h3>
+      <br>
+      <ul>
+        <% @album.photos.each do |photo| %>
+          <li>
+            <figure>
+              <figcaption><%= photo.caption %></figcaption>
+              <%= image_tag photo.img.url(:big) %>
+            </figure>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

@@ -20,4 +20,11 @@ class Like < ActiveRecord::Base
 
     Like.find_by_sql(query).first
   end
+
+  def self.like_count_by_object(object)
+    object_type = object.class.to_s
+    object_id = object.id
+
+    Like.where("object_type LIKE ? AND object_id = ?", object_type, object_id).count
+  end
 end

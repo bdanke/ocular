@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_one(
+  :profile,
+  class_name: "Profile",
+  foreign_key: :owner_id,
+  primary_key: :id)
+
   has_many(
   :in_friendships,
   class_name: "Friendship",
@@ -39,6 +45,18 @@ class User < ActiveRecord::Base
   has_many(
   :comments,
   class_name: "Comment",
+  foreign_key: :owner_id,
+  primary_key: :id)
+
+  has_many(
+  :albums,
+  class_name: "Album",
+  foreign_key: :owner_id,
+  primary_key: :id)
+
+  has_many(
+  :photos,
+  class_name: "Photo",
   foreign_key: :owner_id,
   primary_key: :id)
 
@@ -90,7 +108,7 @@ class User < ActiveRecord::Base
 
   def pending_friends
     pending_friends = []
-    out_friend_ids = (self.out_friendships.select { |friendship| friendship.pending_flag == "F" }).map { |friendship| friendship.out_friend_id }
+    out_friend_ids = (self.out_friendships.select { |friendship| friendship.pending_flag == "T" }).map { |friendship| friendship.out_friend_id }
     out_friend_ids.each do |id|
       pending_friends << User.find(id)
     end
@@ -106,7 +124,8 @@ class User < ActiveRecord::Base
     query = <<-END
     SELECT *
     FROM statuses
-    WHERE #{select_query} LIMIT 25
+    WHERE #{select_query}
+    ORDER BY created_at DESC LIMIT 25
     END
     Status.find_by_sql(query)
   end

@@ -4,3 +4,15 @@
     <%= render partial: "root/header", locals: { user: @user } %>
   </div>
 </header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <%= render partial: "profiles/form", locals: { user: @user, profile: @profile, method: "post" } %>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

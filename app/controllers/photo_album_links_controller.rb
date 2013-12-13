@@ -1,0 +1,2 @@
+class PhotoAlbumLinksController < ApplicationController
+end

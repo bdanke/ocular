@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_filter :require_no_current_user!, only: :create
   # before_filter :require_self!, only: :requests
   def index
-    @user = current_user
     @users = User.all.reject { |user| user == @user }
     render :index
   end
@@ -24,12 +23,14 @@ class UsersController < ApplicationController
     render :show
   end
 
-  def profile
-
-  end
-
   def requests
     @user = User.new()
     render :requests
+  end
+
+  def friends
+    @user = User.find(params[:id])
+    @friends = @user.friends
+    render :friends
   end
 end

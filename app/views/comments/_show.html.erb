@@ -1,7 +1,10 @@
 <% owner = comment.user %>
 <% like = Like.find_by_data(current_user.id, "Comment", comment.id) %>
+<% profile = owner.profile %>
 <div class="comment group">
-  <div class="comment-img"></div>
+  <div class="comment-img">
+    <%= image_tag profile.profile_img.url(:small) %>
+  </div>
   <div class="comment-body">
     <%= link_to "#{owner.name}:", user_profile_url(owner) %>
     <%= comment.body.html_safe %>
@@ -11,9 +14,15 @@
       <li><%= comment.created_at %></li>
       <li>
         <% if like %>
-          <%= link_to "Unlike", likes_url(like_id: like.id), method: :delete %>
+          <%= link_to "Unlike", likes_url(like_id: like.id, user_id: params[:user_id]), method: :delete %>
         <% else %>
-          <%= link_to "Like", likes_url( object_type: "Comment", object_id: comment.id), method: :post %>
+          <%= link_to "Like", likes_url( object_type: "Comment", object_id: comment.id, user_id: params[:user_id]), method: :post %>
+        <% end %>
+      </li>
+      <li>
+        <% like_count = Like.like_count_by_object(comment) %>
+        <% if like_count != 0%>
+          <%= pluralize(like_count, "Like") %>
         <% end %>
       </li>
     </ul>

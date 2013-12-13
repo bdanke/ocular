@@ -123,8 +123,7 @@ header {
   height: 30px;
 }
 
-
-// NEWSFEEDS STYLING
+// MAIN STRUCTURE
 
 .content {
   margin: auto;
@@ -146,6 +145,19 @@ header {
   background: orange;
   padding-top: 30px;
 }
+
+// PROFILE STYLING
+
+.about-content {
+  width: 505px;
+  margin-left: 70px;
+}
+
+.about-img, .about-list {
+  float: left;
+}
+
+// NEWSFEEDS STYLING
 
 .status-form {
   width: 505px;
@@ -193,11 +205,30 @@ header {
   border-bottom: 2px solid black;
 }
 
+.status-user-img {
+  margin-right: 20px;
+  float: left;
+}
+
+.status-content {
+  float: left;
+  margin-bottom: 10px;
+}
+
 .status-body {
-  width: 500px;
+  width: 400px;
   max-height: 300px;
-  max-width: 500px;
+  max-width: 400px;
   background: white;
+}
+
+.status-links > ul {
+  float: left;
+}
+
+.status-links > ul > li {
+  padding-right: 20px;
+  float: left;
 }
 
 .comment-list {
@@ -241,4 +272,23 @@ header {
 .comment-footer > ul > li {
   float: left;
   margin-right: 20px;
+}
+
+// ALBUMS STYLING
+
+.album-header {
+  margin-right: 70px;
+  margin-left: 70px;
+}
+
+.photo-upload-form {
+  float: left;
+}
+
+.photo-upload-form > form > input {
+  margin-bottom: 5px;
+}
+
+.album-button {
+  float: right;
 }

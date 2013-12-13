@@ -1,0 +1,31 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: current_user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="friends-list">
+      <% unless @friends.empty? %>
+        <h3>Friends</h3>
+        <br>
+        <% @friends.each do |friend| %>
+          <br>
+          <%= friend.profile.profile_img.url(:small) %>
+          <%= friend.name %>
+          <% if @user == current_user %>
+            <% friendship = Friendship.find_pair(current_user, friend) %>
+            <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

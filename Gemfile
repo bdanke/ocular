@@ -11,6 +11,9 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'validates_timeliness', '~> 3.0'
 gem 'email_validator'
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'figaro'
 
 group :development do
   gem 'better_errors'

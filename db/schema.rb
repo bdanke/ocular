@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212192307) do
+ActiveRecord::Schema.define(:version => 20131213183902) do
+
+  create_table "albums", :force => true do |t|
+    t.integer  "owner_id",   :null => false
+    t.string   "title",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "albums", ["owner_id"], :name => "index_albums_on_owner_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "owner_id",    :null => false
@@ -47,6 +56,45 @@ ActiveRecord::Schema.define(:version => 20131212192307) do
   add_index "likes", ["object_id"], :name => "index_likes_on_object_id"
   add_index "likes", ["owner_id", "object_type", "object_id"], :name => "index_likes_on_owner_id_and_object_type_and_object_id", :unique => true
   add_index "likes", ["owner_id"], :name => "index_likes_on_owner_id"
+
+  create_table "photo_album_links", :force => true do |t|
+    t.integer  "photo_id",   :null => false
+    t.integer  "album_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "photo_album_links", ["album_id"], :name => "index_photo_album_links_on_album_id"
+  add_index "photo_album_links", ["photo_id", "album_id"], :name => "index_photo_album_links_on_photo_id_and_album_id", :unique => true
+  add_index "photo_album_links", ["photo_id"], :name => "index_photo_album_links_on_photo_id"
+
+  create_table "photos", :force => true do |t|
+    t.integer  "owner_id",         :null => false
+    t.string   "caption"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+  end
+
+  add_index "photos", ["owner_id"], :name => "index_photos_on_owner_id"
+
+  create_table "profiles", :force => true do |t|
+    t.integer  "owner_id",                 :null => false
+    t.string   "school"
+    t.string   "employer"
+    t.string   "location"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.string   "profile_img_file_name"
+    t.string   "profile_img_content_type"
+    t.integer  "profile_img_file_size"
+    t.datetime "profile_img_updated_at"
+  end
+
+  add_index "profiles", ["owner_id"], :name => "index_profiles_on_owner_id", :unique => true
 
   create_table "statuses", :force => true do |t|
     t.integer  "owner_id",     :null => false

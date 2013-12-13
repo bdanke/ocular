@@ -1,0 +1,47 @@
+<% if method == "post" %>
+  <% url = user_profile_url(user) %>
+  <% button_text = "Submit Profile" %>
+<% elsif method == "edit" %>
+  <% url = edit_user_profile_url(user) %>
+  <% button_text = "Update Profile" %>
+<% end %>
+
+<form action="<%= url %>" enctype="multipart/form-data" method="post">
+  <input
+    name="authenticity_token"
+    type="hidden"
+    value="<%= form_authenticity_token %>">
+
+    <div class="profile-data group">
+      <div class="school">
+        <label>School:
+          <br>
+          <input class="profile-text-input" type="text" name="profile[school]" value="<%= profile.school %>">
+        </label>
+      </div>
+      <div class="employer">
+        <label>Employer:
+          <br>
+          <input class="profile-text-input" type="text" name="profile[employer]" value="<%= profile.employer %>">
+        </label>
+      </div>
+      <div class="location">
+        <label>Location:
+          <br>
+          <input class="profile-text-input" type="text" name="profile[location]" value="<%= profile.location %>">
+        </label>
+      </div>
+      <div class="image">
+        <label>Profile Image:
+          <br>
+          <input type="file" name="profile[profile_img]">
+        </label>
+      </div>
+    </div>
+    <% if method == "post" %>
+      <input type="submit" value="<%= button_text %>">
+    <% elsif method == "edit" %>
+      <input type="hidden" name="_method" value="PUT">
+      <input type="submit" value="<%= button_text %>">
+    <% end %>
+</form>
