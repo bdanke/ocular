@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
     if user.nil?
       render :json => "Credentials were wrong"
     else
-      self.current_user = user
+      user.reset_session_token!
+      session[:session_token] = user.session_token
       redirect_to user_newsfeed_url(user)
     end
   end
