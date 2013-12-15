@@ -22,12 +22,26 @@ class MessageThread < ActiveRecord::Base
   primary_key: :id)
 
   def self.find_by_users(sender, recipient)
-    query = <<-END
+    id1 = sender.id
+    id2 = recipient.id
+    query = <<-END, id1, id2, id2, id1
     SELECT *
     FROM message_threads
-    WHERE sender_id = ? AND recipient_id = ?
+    WHERE (sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)
+    LIMIT 1
     END
 
-    MessageThread.find_by_sql(query, sender.id, recipient.id).first
+    MessageThread.find_by_sql(query).first
+  end
+
+  def self.find_by_ids(id1, id2)
+    query = <<-END, id1, id2, id2, id1
+    SELECT *
+    FROM message_threads
+    WHERE (sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)
+    LIMIT 1
+    END
+
+    MessageThread.find_by_sql(query).first
   end
 end

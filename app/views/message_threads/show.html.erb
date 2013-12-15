@@ -26,21 +26,29 @@
   </div>
 
   <div class="middle-content">
-    <% unless @messages.empty? %>
-      <% sender_profile = @sender.profile %>
-      <% recipient_profile = @recipient.profile %>
-      <% @messages.each do |message| %>
-        <div class="message">
-          <% if message.owner_id == @sender.id %>
-            <%= image_tag sender_profile.img.url(:small) %>
-          <% elsif message.owner_id == @recipient.id %>
-            <%= image_tag recipient_profile.img.url(:small) %>
-          <% end %>
-          <%= message.body %>
-        </div>
+    <ul>
+      <% @thread.messages.order("messages.created_at").each do |message| %>
+        <% if message.owner_id == current_user.id %>
+          <% friend = current_user %>
+        <% else %>
+          <% friend = @them %>
+        <% end %>
+        <li>
+          <div class="user-img">
+            <%= image_tag friend.profile.profile_img.url(:small) %>
+          </div>
+          <div class="user-name">
+            <a href="<%= user_profile_url(friend) %>">
+              <%= friend.name %>
+            </a>
+          </div>
+          <div class="message-body">
+            <%= message.body %>
+          </div>
+        </li>
       <% end %>
-    <% end %>
-    <%= render partial: "messages/form", locals: { recipient_id: @recipient.id } %>
+    </ul>
+    <%= render partial: "messages/form", locals: { recipient_id: @them.id} %>
   </div>
 
   <div class="right-sidebar">

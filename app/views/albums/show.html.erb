@@ -16,11 +16,14 @@
       <ul>
         <% @album.photos.each do |photo| %>
           <li>
+            <a href="<%= user_photo_url(params[:user_id], photo) %>">
             <figure>
               <figcaption><%= photo.caption %></figcaption>
               <%= image_tag photo.img.url %>
             </figure>
+          </a>
           </li>
+        <% end %>
       </ul>
     </div>
   </div>

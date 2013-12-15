@@ -1,0 +1,40 @@
+<header>
+  <div class="header-wrapper">
+    <div class="logo"></div>
+    <%= render partial: "root/header", locals: { user: current_user } %>
+  </div>
+</header>
+
+<div class="content">
+  <div class="left-sidebar">
+  </div>
+
+  <div class="middle-content">
+    <div class="photo">
+      <h3><%= @photo.caption %></h3>
+      <br>
+      <%= image_tag @photo.img.url %>
+      <% tags = @photo.tags %>
+      <% if tags %>
+        <br>
+        <h4>Tagged in this photo:</h4>
+        <br>
+        <% tagged_users = tags.map { |tag| User.find(tag.user_id) } %>
+        <ul class="tagged-list">
+          <% tagged_users.each do |user| %>
+            <li class="tag-item">
+              <a href="<%= user_profile_url(user) %>">
+                <%= user.name %>
+              </a>
+            <li>
+          <% end %>
+        </ul>
+        <br>
+      <% end %>
+      <%= button_to "Tag Friends" %>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+  </div>
+</div>

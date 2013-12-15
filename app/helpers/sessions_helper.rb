@@ -1,6 +1,6 @@
 module SessionsHelper
   def current_user
-    User.find_by_session_token(session[:session_token])
+    @current_user || @current_user = User.find_by_session_token(session[:session_token])
   end
 
   def logged_in?
@@ -27,5 +27,9 @@ module SessionsHelper
 
   def require_self_or_friend!
     redirect_to :back unless params[:user_id].to_i == current_user.id || (current_user.friends.map { |friend| friend.id }).include?(params[:user_id].to_i)
+  end
+
+  def require_self!
+    redirect_to :back unless params[:user_id].to_i == current_user.id
   end
 end

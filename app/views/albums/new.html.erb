@@ -28,7 +28,7 @@
           <label for="<%= 'photo-#{photo.id}' %>">
             <figure>
               <figcaption><%= photo.caption %></figcaption>
-              <%= image_tag photo.img.url(:big) %>
+              <%= image_tag photo.img.url %>
             </figure>
         <% end %>
         <input type="submit" value="Create Album">

@@ -3,7 +3,7 @@ class Photo < ActiveRecord::Base
   validates :owner_id, :img, presence: true
 
   has_attached_file :img, styles: {
-    :small => "50x50#"
+    small: "50x50"
   }
 
   belongs_to(
@@ -17,6 +17,12 @@ class Photo < ActiveRecord::Base
   class_name: "PhotoAlbumLink",
   foreign_key: :photo_id,
   primary_key: :id)
+
+  has_many(
+    :tags,
+    class_name: "Tag",
+    foreign_key: :photo_id,
+    primary_key: :id)
 
   has_many :albums, through: :photo_album_links, source: :album_id
 end

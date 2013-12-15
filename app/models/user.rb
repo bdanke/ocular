@@ -61,9 +61,21 @@ class User < ActiveRecord::Base
   primary_key: :id)
 
   has_many(
-  :message_threads,
+    :taggings,
+    class_name: "Tag",
+    foreign_key: :user_id,
+    primary_key: :id)
+
+  has_many(
+  :out_message_threads,
   class_name: "MessageThread",
   foreign_key: :sender_id,
+  primary_key: :id)
+
+  has_many(
+  :in_message_threads,
+  class_name: "MessageThread",
+  foreign_key: :recipient_id,
   primary_key: :id)
 
   def self.find_by_credentials(email, password)

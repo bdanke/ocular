@@ -27,7 +27,7 @@
             <a href="<%= user_photos_url(@user) %>">
               <figure>
                 <figcaption>All Photos</figcaption>
-                <%= image_tag @photo.img.url(:big) %>
+                <%= image_tag @photo.img.url %>
               </figure>
             </a>
           </li>
@@ -36,7 +36,7 @@
               <a href="<%= user_album_url(@user, album) %>">
                 <figure>
                   <figcaption><%= album.title %></figcaption>
-                  <%= image_tag album.photos.first.img.url(:big) %>
+                  <%= image_tag album.photos.first.img.url %>
                 </figure>
               <a>
             </li>

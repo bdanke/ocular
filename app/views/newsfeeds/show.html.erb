@@ -12,7 +12,7 @@
   <div class="middle-content">
     <div class="status-list">
       <%= render partial: "statuses/form", locals: { status: @status } %>
-      <% current_user.newsfeed_statuses.each do |status| %>
+      <% @statuses.each do |status| %>
         <%= render partial: "statuses/show", locals: { status: status } %>
       <% end %>
     </div>

@@ -1,4 +1,6 @@
 class FriendshipsController < ApplicationController
+  before_filter :require_current_user!
+
   def create
     friendship = Friendship.new()
     friendship.in_friend_id = current_user.id

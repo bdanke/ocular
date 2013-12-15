@@ -1,5 +1,6 @@
 class AlbumsController < ApplicationController
   before_filter :require_current_user!
+  before_filter :require_self_or_friend!, only: [:index, :show]
 
   def new
     @photos = current_user.photos
