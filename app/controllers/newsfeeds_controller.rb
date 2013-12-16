@@ -3,7 +3,7 @@ class NewsfeedsController < ApplicationController
 
   def show
     @status = Status.new()
-    @statuses = current_user.newsfeed_statuses
+    @data = current_user.newsfeed_data
     render :show
   end
 end

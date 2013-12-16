@@ -1,5 +1,5 @@
 <div class="signup-content">
-  <h2>Sign Up!</h2>
+  <h1>Sign Up!</h1>
   <br>
   <form action="<%= users_url %>" method="post">
     <input
@@ -35,10 +35,11 @@
       <br>
       <input type="date" name="user[bday]">
     </lable>
-    <br>
+    <br><br>
     <input type="radio" name="user[gender]" value="f">Female</input>
-    <input type="radio" name="user[gender]" value="m">Male</input>
     <br>
-    <input type="submit" value="Sign Up">
+    <input type="radio" name="user[gender]" value="m">Male</input>
+    <br><br>
+    <input class="signup-button" type="submit" value="Sign Up">
   </form>
 </div>

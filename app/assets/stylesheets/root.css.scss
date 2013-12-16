@@ -8,6 +8,10 @@
   clear: both;
 }
 
+body {
+  background: #2E9AFE;
+}
+
 header {
   width: 100%;
   height: 100px;
@@ -16,17 +20,19 @@ header {
 
 .header-wrapper {
   margin: auto;
+  padding-top: 20px;
   width: 1000px;
-  height: 100px;
+  height: 80px;
   background: blue;
 }
 
 .logo {
   float: left;
-  width: 80px;
-  height: 80px;
-  margin-top: 10px;
-  background: red;
+  font-family: sans-serif;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-size: 50px;
+  color: white;
 }
 
 // LANDING PAGE
@@ -35,22 +41,23 @@ header {
   float: right;
   font-family: sans-serif;
   font-size: 15px;
-  margin-top: 20px;
 }
 
 .signin-data {
   float: left;
+  font-size: 20px;
+  color: white;
   margin-right: 20px;
 }
 
 .signin-input {
   width: 150px;
-  height: 30px;
+  height: 40px;
 }
 
 .signin-button {
-  margin-top: 19px;
-  height: 30px;
+  margin-top: 22px;
+  height: 40px;
   width: 80px;
 }
 
@@ -60,21 +67,31 @@ header {
 }
 
 .about {
-  width: 600px;
-  height: 700px;
-  background: green;
+  width: 560px;
+  height: 650px;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: lightblue;
+  font-size: 20px;
   float: left;
+}
+
+.about > ul {
+  margin-left: 40px;
 }
 
 .signup {
   width: 400px;
-  height: 700px;
+  height: 650px;
+  padding-top: 50px;
+  font-size: 20px;
   float:right;
-  background: red;
+  background: lightblue;
 }
 
 .signup-content {
-  background: yellow;
+  background: lightblue;
 }
 
 .names {}
@@ -93,20 +110,17 @@ header {
   height: 30px;
 }
 
-
+.signup-button {
+  height: 40px;
+  width: 120px;
+}
 
 // SIGNED IN HEADER
-
-.search-bar {
-  margin-top: 35px;
-  margin-left: 20px;
-  float: left;
-}
 
 .signed-in-header-links {
   margin-top: 20px;
   float: right;
-  background: green;
+  background: blue;
 }
 
 .signed-in-header-links > ul {
@@ -116,6 +130,11 @@ header {
 .signed-in-header-links > ul > li {
   margin-right: 20px;
   float: left;
+}
+
+.signed-in-header-links > ul > li > a{
+  color: white;
+  font-size: 20px;
 }
 
 .logout-button {
@@ -128,21 +147,35 @@ header {
 .content {
   margin: auto;
   width: 1000px;
-  height: 800px;
+  min-height: 800px;
 }
 
 .left-sidebar {
-  width: 150px;
-  height: 800px;
+  width: 198px;
+  min-height: 800px;
   float: left;
-  background: grey;
+  border-right: 2px solid white;
+  background: lightblue;
+}
+
+.left-sidebar > ul {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.left-sidebar > ul > li {
+  margin-top: 10px;
+}
+
+.left-sidebar > ul > li > a {
+  font-size: 20px;
 }
 
 .middle-content {
-  width: 650px;
-  height: 800px;
+  width: 800px;
+  min-height: 770px;
   float: left;
-  background: orange;
+  background: lightblue;
   padding-top: 30px;
 }
 
@@ -162,7 +195,7 @@ header {
 .status-form {
   width: 505px;
   height: 159px;
-  margin-left: 70px;
+  margin-left: 140px;
   padding-bottom: 20px;
   border-bottom: 2px solid black;
 }
@@ -178,28 +211,32 @@ header {
   float: right;
 }
 
-.right-sidebar {
-  width: 200px;
-  height: 800px;
-  float: left;
-  background: grey;
-}
-
 // USERS INDEX
 
 .user-list {
-  width: 650px;
-  height: 800px;
+  width: 800px;
+  min-height: 770px;
   float: left;
-  background: orange;
-  padding-top: 30px;
+  background: lightblue;
+}
+
+.user {
+  margin-left: 40px;
+  margin-bottom: 20px;
+  font-size: 40px;
+}
+
+.user > form {
+  margin-right: 20px;
+  font-size: 20px;
+  float: left;
 }
 
 // STATUS SHOW PARTIAL
 
 .status {
   width: 505px;
-  margin-left: 70px;
+  margin-left: 140px;
   margin-top: 30px;
   padding-bottom: 20px;
   border-bottom: 2px solid black;

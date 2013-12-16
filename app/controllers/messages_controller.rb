@@ -26,6 +26,7 @@ class MessagesController < ApplicationController
     @thread = MessageThread.find_by_ids(current_user.id, params[:recipient_id])
     if @thread
       message.thread_id = @thread.id
+      message.seen = "F"
       message.save!
       redirect_to user_message_thread_url(current_user, @thread)
     else
@@ -34,8 +35,9 @@ class MessagesController < ApplicationController
       @thread.recipient_id = params[:recipient_id]
       @thread.save!
       message.thread_id = @thread.id
+      message.seen = "F"
       message.save!
-      redirect_to message_thread_url(current_user, @thread)
+      redirect_to user_message_thread_url(current_user, @thread)
     end
   end
 end

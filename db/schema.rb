@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131215165437) do
+ActiveRecord::Schema.define(:version => 20131215182007) do
 
   create_table "albums", :force => true do |t|
     t.integer  "owner_id",   :null => false
@@ -78,6 +78,17 @@ ActiveRecord::Schema.define(:version => 20131215165437) do
 
   add_index "messages", ["owner_id"], :name => "index_messages_on_owner_id"
   add_index "messages", ["thread_id"], :name => "index_messages_on_thread_id"
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id",        :null => false
+    t.integer  "tagged_user_id", :null => false
+    t.integer  "photo_id",       :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "notifications", ["tagged_user_id"], :name => "index_notifications_on_tagged_user_id"
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "photo_album_links", :force => true do |t|
     t.integer  "photo_id",   :null => false

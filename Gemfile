@@ -14,6 +14,7 @@ gem 'email_validator'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'figaro'
+gem 'backbone-on-rails'
 
 group :development do
   gem 'better_errors'

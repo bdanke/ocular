@@ -134,7 +134,6 @@ class User < ActiveRecord::Base
   end
 
   def newsfeed_statuses
-    statuses = []
     select_query = "owner_id = #{self.id}"
     self.friends.each do |friend|
       select_query += " OR wall_user_id = #{friend.id}"
@@ -146,6 +145,32 @@ class User < ActiveRecord::Base
     ORDER BY created_at DESC LIMIT 25
     END
     Status.find_by_sql(query)
+  end
+
+  def newsfeed_notifications
+    select_array = []
+    friends = self.friends
+    unless friends.empty?
+      friends.each do |friend|
+        select_array << "user_id = #{friend.id}"
+      end
+      select_query = select_array.join(" OR")
+      query = <<-END
+      SELECT *
+      FROM notifications
+      WHERE #{select_query}
+      ORDER BY created_at DESC LIMIT 25
+      END
+      return Notification.find_by_sql(query)
+    end
+    []
+  end
+
+  def newsfeed_data
+    statuses = self.newsfeed_statuses
+    notifications = self.newsfeed_notifications
+    together = statuses.concat(notifications)
+    together.sort! { |a,b| a.created_at <=> b.created_at }
   end
 
   def wall_posts

@@ -17,40 +17,46 @@
   <div class="middle-content">
     <div class="user-list">
       <% unless friends.empty? %>
-        <h3>Friends</h3>
+        <h1>Friends</h1>
         <br>
         <% friends.each do |friend| %>
-          <% friendship = Friendship.find_pair(current_user, friend) %>
-          <br>
-          <%= friend.name %>
-          <br>
-          <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
-          <br>
-          <form action="<%= new_message_url %>" method="get">
-            <input type="hidden" name="recipient_id" value="<%= friend.id %>">
-            <input type="submit" value="Send Message">
-          </form>
+          <div class="user group">
+            <% friendship = Friendship.find_pair(current_user, friend) %>
+            <br>
+            <%= image_tag friend.profile.profile_img.url(:small) %>
+            <%= friend.name %>
+            <br>
+            <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
+            <br>
+            <form action="<%= new_message_url %>" method="get">
+              <input type="hidden" name="recipient_id" value="<%= friend.id %>">
+              <input type="submit" value="Send Message">
+            </form>
+          </div>
         <% end %>
         <br>
       <% end %>
 
       <% unless @users.empty? %>
-        <h3>Users</h3>
+        <h1>Users</h1>
         <% @users.each do |user| %>
-          <br>
-          <%= user.name %>
-          <br>
-          <% if pending_friends.include?(user) %>
-            <% friendship = Friendship.find_pair(current_user, user) %>
-            <%= button_to "Pending: Cancel Request", friendship_url(friendship), method: "delete" %>
-          <% else %>
-            <%= button_to "Friend Request", user_friendship_url(user), method: "post" %>
+          <div class="user group">
+            <br>
+            <%= image_tag user.profile.profile_img.url(:small) %>
+            <%= user.name %>
+            <br>
+            <% if pending_friends.include?(user) %>
+              <% friendship = Friendship.find_pair(current_user, user) %>
+              <%= button_to "Pending: Cancel Request", friendship_url(friendship), method: "delete" %>
+            <% else %>
+              <%= button_to "Friend Request", user_friendship_url(user), method: "post" %>
+            <% end %>
+            <form action="<%= new_message_url %>" method="get">
+              <input type="hidden" name="recipient_id" value="<%= user.id %>">
+              <input type="submit" value="Send Message">
+            </form>
           <% end %>
-          <form action="<%= new_message_url %>" method="get">
-            <input type="hidden" name="recipient_id" value="<%= user.id %>">
-            <input type="submit" value="Send Message">
-          </form>
-        <% end %>
+        </div>
       <% end %>
     </div>
   </div>

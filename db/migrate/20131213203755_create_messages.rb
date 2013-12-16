@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.integer :owner_id, null: false
       t.integer :thread_id, null: false
+      t.string :seen, null: false
       t.text :body, null: false
 
       t.timestamps

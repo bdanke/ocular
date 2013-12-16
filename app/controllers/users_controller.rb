@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_filter :require_current_user!, except: :create
   before_filter :require_no_current_user!, only: :create
-  # before_filter :require_self!, only: :requests
+  before_filter :require_self_or_friend!, only: :friends
+
   def index
     @users = User.all.reject { |user| user == @user }
     render :index
@@ -16,11 +17,6 @@ class UsersController < ApplicationController
     else
       render :json => @user.errors.full_messages
     end
-  end
-
-  def newsfeed
-    @user = current_user
-    render :show
   end
 
   def requests

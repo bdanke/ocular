@@ -3,6 +3,7 @@ class Photo < ActiveRecord::Base
   validates :owner_id, :img, presence: true
 
   has_attached_file :img, styles: {
+    medium: "100x100",
     small: "50x50"
   }
 

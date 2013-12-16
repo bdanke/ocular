@@ -10,11 +10,13 @@ class PhotosController < ApplicationController
   end
 
   def index
-    @photos = User.find(params[:user_id]).photos
+    @user = User.find(params[:user_id])
+    @photos = @user.photos
     render :index
   end
 
   def show
+    @user = User.find(params[:user_id])
     @photo = Photo.find(params[:id])
     render :show
   end

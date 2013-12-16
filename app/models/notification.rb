@@ -1,4 +1,4 @@
 class Notification < ActiveRecord::Base
-  attr_accessible :user_id, :body
-  validates :user_id, :body, presence: true
+  attr_accessible :user_id, :tagged_user_id, :photo_id
+  validates :user_id, :tagged_user_id, :photo_id, presence: true
 end

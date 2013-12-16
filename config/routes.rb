@@ -23,5 +23,6 @@ Ocular::Application.routes.draw do
   resources :statuses, only: [:create, :edit, :update, :destroy]
   resources :comments, only: [:create, :destroy]
   resource :likes, only: [:create, :destroy]
+  resources :tags, only: :destroy
   root to: "root#root"
 end

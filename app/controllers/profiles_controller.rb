@@ -14,6 +14,10 @@ class ProfilesController < ApplicationController
     profile = Profile.new(params[:profile])
     profile.owner_id = user.id
     profile.save!
+    photo = Photo.new()
+    photo.img = profile.profile_img
+    photo.owner_id = current_user.id
+    photo.save!
     redirect_to user_newsfeed_url(user)
   end
 

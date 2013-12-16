@@ -6,6 +6,7 @@ class Profile < ActiveRecord::Base
 
   has_attached_file :profile_img, styles: {
     big: "300x300#",
+    medium: "100x100",
     small: "50x50>"
   }
 

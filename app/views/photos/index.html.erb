@@ -10,18 +10,18 @@
   </div>
 
   <div class="middle-content">
-    <% if @user == current_user %>
-    <% end %>
     <div class="photos">
       <h3>Photos:</h3>
       <br>
       <ul>
         <% @photos.each do |photo| %>
           <li>
-            <figure>
-              <figcaption><%= photo.caption %></figcaption>
-              <%= image_tag photo.img.url(:big) %>
-            </figure>
+            <a href="<%= user_photo_url(@user, photo) %>">
+              <figure>
+                <figcaption><%= photo.caption %></figcaption>
+                <%= image_tag photo.img.url(:big) %>
+              </figure>
+            </a>
           </li>
         <% end %>
       </ul>
