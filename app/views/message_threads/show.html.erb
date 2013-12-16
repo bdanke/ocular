@@ -40,18 +40,15 @@
           </div>
           <div class="user-name">
             <a href="<%= user_profile_url(friend) %>">
-              <%= friend.name %>
+              <%= friend.name.html_safe %>
             </a>
           </div>
           <div class="message-body">
-            <%= message.body %>
+            <%= message.body.html_safe %>
           </div>
         </li>
       <% end %>
     </ul>
     <%= render partial: "messages/form", locals: { recipient_id: @them.id} %>
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

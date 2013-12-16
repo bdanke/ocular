@@ -7,18 +7,25 @@
 
 <div class="content">
   <div class="left-sidebar">
+    <ul>
+      <li><a href="<%= user_profile_url(current_user) %>">Profile</a></li>
+      <li><a href="<%= user_newsfeed_url(current_user) %>">Newsfeed</a></li>
+      <li><a href="<%= user_albums_url(current_user) %>">Photo Albums</a></li>
+      <li><a href="<%= friends_user_url(current_user) %>">Friends</a></li>
+      <li><a href="<%= user_message_threads_url(current_user) %>">Messages</a></li>
+    </ul>
   </div>
 
   <div class="middle-content">
     <div class="photos">
-      <h3><%= @album.title %></h3>
+      <h3><%= @album.title.html_safe %></h3>
       <br>
       <ul>
         <% @album.photos.each do |photo| %>
           <li>
             <a href="<%= user_photo_url(params[:user_id], photo) %>">
             <figure>
-              <figcaption><%= photo.caption %></figcaption>
+              <figcaption><%= photo.caption.html_safe %></figcaption>
               <%= image_tag photo.img.url %>
             </figure>
           </a>
@@ -26,8 +33,5 @@
         <% end %>
       </ul>
     </div>
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

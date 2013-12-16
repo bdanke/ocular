@@ -3,10 +3,10 @@
 <% photo = Photo.find(notification.photo_id) %>
 <div class="notification">
   <% if tagged == current_user %>
-  <%= owner.name + "tagged you in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
+  <%= owner.name.html_safe + "tagged you in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
   <% elsif owner == tagged %>
-  <%= owner.name + "tagged themself in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
+  <%= owner.name.html_safe + "tagged themself in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
   <% else %>
-  <%= owner.name + "tagged #{tagged.name} in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
+  <%= owner.name.html_safe + "tagged #{tagged.name} in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
   <% end %>
 </div>

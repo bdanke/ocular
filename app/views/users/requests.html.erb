@@ -9,6 +9,13 @@
 
 <div class="content">
   <div class="left-sidebar">
+    <ul>
+      <li><a href="<%= user_profile_url(current_user) %>">Profile</a></li>
+      <li><a href="<%= user_newsfeed_url(current_user) %>">Newsfeed</a></li>
+      <li><a href="<%= user_albums_url(current_user) %>">Photo Albums</a></li>
+      <li><a href="<%= friends_user_url(current_user) %>">Friends</a></li>
+      <li><a href="<%= user_message_threads_url(current_user) %>">Messages</a></li>
+    </ul>
   </div>
 
   <div class="middle-content">
@@ -18,7 +25,7 @@
         <% pending_request_friends.each do |pending_request_friend| %>
           <% friendship = Friendship.find_pair(current_user, pending_request_friend) %>
           <br>
-          <%= pending_request_friend.name %>
+          <%= pending_request_friend.name.html_safe %>
           <br>
           <%= button_to "Accept Friend Request", friendship_url(friendship), method: "put" %>
           <%= button_to "Delete Friend Request", friendship_url(friendship), method: "delete "%>
@@ -28,8 +35,5 @@
         <h3>No Friend Requests at this time.</h3>
       <% end %>
     </div>
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

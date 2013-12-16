@@ -17,7 +17,7 @@
               <%= image_tag friend.profile.profile_img.url(:small) %>
             </div>
             <div class="user-name">
-              <%= friend.name %>
+              <%= friend.name.html_safe %>
             </div>
           </a>
         </li>
@@ -36,13 +36,10 @@
           <% elsif message.owner_id == @recipient.id %>
             <%= image_tag recipient_profile.img.url(:small) %>
           <% end %>
-          <%= message.body %>
+          <%= message.body.html_safe %>
         </div>
       <% end %>
     <% end %>
     <%= render partial: "messages/form", locals: { recipient_id: @recipient.id } %>
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

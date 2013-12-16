@@ -132,9 +132,13 @@ header {
   float: left;
 }
 
-.signed-in-header-links > ul > li > a{
+.signed-in-header-links > ul > li > a {
   color: white;
   font-size: 20px;
+}
+
+.signed-in-header-links > ul > li > a:hover {
+  text-decoration: underline;
 }
 
 .logout-button {
@@ -147,19 +151,24 @@ header {
 .content {
   margin: auto;
   width: 1000px;
-  min-height: 800px;
+  min-height: 770px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: lightblue;
 }
 
 .left-sidebar {
   width: 198px;
   min-height: 800px;
   float: left;
-  border-right: 2px solid white;
   background: lightblue;
 }
 
+.left-sidebar > ul > li > a:hover {
+  font-weight: bold;
+}
+
 .left-sidebar > ul {
-  margin-top: 30px;
   margin-left: 30px;
 }
 
@@ -175,8 +184,8 @@ header {
   width: 800px;
   min-height: 770px;
   float: left;
+  border-left: 2px solid white;
   background: lightblue;
-  padding-top: 30px;
 }
 
 // PROFILE STYLING
@@ -196,8 +205,6 @@ header {
   width: 505px;
   height: 159px;
   margin-left: 140px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid black;
 }
 
 .status-form > textarea {
@@ -237,9 +244,10 @@ header {
 .status {
   width: 505px;
   margin-left: 140px;
-  margin-top: 30px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 2px solid white;
 }
 
 .status-user-img {
@@ -269,7 +277,7 @@ header {
 }
 
 .comment-list {
-  background: yellow;
+  background: lightblue;
 }
 
 // COMMENT FORM

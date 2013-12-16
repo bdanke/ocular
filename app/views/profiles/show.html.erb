@@ -7,6 +7,13 @@
 
 <div class="content">
   <div class="left-sidebar">
+    <ul>
+      <li><a href="<%= user_profile_url(current_user) %>">Profile</a></li>
+      <li><a href="<%= user_newsfeed_url(current_user) %>">Newsfeed</a></li>
+      <li><a href="<%= user_albums_url(current_user) %>">Photo Albums</a></li>
+      <li><a href="<%= friends_user_url(current_user) %>">Friends</a></li>
+      <li><a href="<%= user_message_threads_url(current_user) %>">Messages</a></li>
+    </ul>
   </div>
 
   <div class="middle-content">
@@ -17,11 +24,11 @@
       </div>
       <div class="about-list">
         <ul>
-          <li><h3><%= @user.name %></h3></li>
+          <li><h3><%= @user.name.html_safe %></h3></li>
           <li>Birthday: &nbsp;<%= @user.bday %></li>
-          <li>Location: &nbsp;<%= profile.location %></li>
-          <li>Employer: &nbsp;<%= profile.employer %></li>
-          <li>School: &nbsp;<%= profile.school %></li>
+          <li>Location: &nbsp;<%= profile.location.html_safe %></li>
+          <li>Employer: &nbsp;<%= profile.employer.html_safe %></li>
+          <li>School: &nbsp;<%= profile.school.html_safe %></li>
         </ul>
       </div>
       <div class="about-links">
@@ -40,8 +47,5 @@
         <%= render partial: "statuses/show", locals: { status: post }%>
       <% end %>
     </div>
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

@@ -7,6 +7,13 @@
 
 <div class="content">
   <div class="left-sidebar">
+    <ul>
+      <li><a href="<%= user_profile_url(current_user) %>">Profile</a></li>
+      <li><a href="<%= user_newsfeed_url(current_user) %>">Newsfeed</a></li>
+      <li><a href="<%= user_albums_url(current_user) %>">Photo Albums</a></li>
+      <li><a href="<%= friends_user_url(current_user) %>">Friends</a></li>
+      <li><a href="<%= user_message_threads_url(current_user) %>">Messages</a></li>
+    </ul>
   </div>
 
   <div class="middle-content">
@@ -27,7 +34,7 @@
             <a href="<%= user_photos_url(@user) %>">
               <figure>
                 <figcaption>All Photos</figcaption>
-                <%= image_tag @photo.img.url %>
+                <%= image_tag @photo.img.url(:medium) %>
               </figure>
             </a>
           </li>
@@ -35,8 +42,8 @@
             <li>
               <a href="<%= user_album_url(@user, album) %>">
                 <figure>
-                  <figcaption><%= album.title %></figcaption>
-                  <%= image_tag album.photos.first.img.url %>
+                  <figcaption><%= album.title.html_safe %></figcaption>
+                  <%= image_tag album.photos.first.img.url(:medium) %>
                 </figure>
               <a>
             </li>
@@ -44,8 +51,5 @@
         </ul>
       <% end %>
     </div>
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

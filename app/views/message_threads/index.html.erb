@@ -17,7 +17,7 @@
               <%= image_tag friend.profile.profile_img.url(:small) %>
             </div>
             <div class="user-name">
-              <%= friend.name %>
+              <%= friend.name.html_safe %>
             </div>
           </a>
         </li>
@@ -26,8 +26,5 @@
   </div>
 
   <div class="middle-content">
-  </div>
-
-  <div class="right-sidebar">
   </div>
 </div>

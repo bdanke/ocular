@@ -7,6 +7,13 @@
 
 <div class="content">
   <div class="left-sidebar">
+    <ul>
+      <li><a href="<%= user_profile_url(current_user) %>">Profile</a></li>
+      <li><a href="<%= user_newsfeed_url(current_user) %>">Newsfeed</a></li>
+      <li><a href="<%= user_albums_url(current_user) %>">Photo Albums</a></li>
+      <li><a href="<%= friends_user_url(current_user) %>">Friends</a></li>
+      <li><a href="<%= user_message_threads_url(current_user) %>">Messages</a></li>
+    </ul>
   </div>
 
   <div class="middle-content">
@@ -27,41 +34,12 @@
           <input type="checkbox" name="album[photo_ids][]" id="<%= 'photo-#{photo.id}' %>" value="<%= photo.id %>">
           <label for="<%= 'photo-#{photo.id}' %>">
             <figure>
-              <figcaption><%= photo.caption %></figcaption>
-              <%= image_tag photo.img.url %>
+              <figcaption><%= photo.caption.html_safe %></figcaption>
+              <%= image_tag photo.img.url(:medium) %>
             </figure>
         <% end %>
         <input type="submit" value="Create Album">
       </form>
     </div>
   </div>
-
-  <div class="right-sidebar">
-  </div>
 </div>
-
-
-
-
-
-
-
-<form action="<%= albums_url %>" method="post">
-  <input
-    name="authenticity_token"
-    type="hidden"
-    value="<%= form_authenticity_token %>">
-  <input type="text" name="album[title]">
-  <br>
-  <h3>Add Photos to Album:</h3>
-  <br>
-  <% current_user.photos.each do |photo| %>
-    <input type="checkbox" name="album[photo_ids][]" id="<%= 'photo-#{photo.id}' %>" value="<%= photo.id %>">
-    <label for="<%= 'photo-#{photo.id}' %>">
-      <figure>
-        <figcaption><%= photo.caption %></figcaption>
-        <%= image_tag photo.img.url(:big) %>
-      </figure>
-  <% end %>
-  <input type="submit" value="Create Album">
-</form>
