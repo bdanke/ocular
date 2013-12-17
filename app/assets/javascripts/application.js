@@ -49,15 +49,15 @@ $(document).ready(function(event) {
     $form[0].reset();
   });
 
-  $(".message-form").on("ajax:success", function(event, data) {
+  $(".middle-content").on("ajax:success", ".message-form", function(event, data) {
     $(".middle-content").html(data);
   });
 
-  $(".friend-button").on("ajax:success", function(event, data) {
+  $(".middle-content").on("ajax:success", ".friend-button", function(event, data) {
     $(".middle-content").html(data);
   });
 
-  $(".like-links").on("ajax:success", "a", function(event, data) {
+  $(".middle-content").on("ajax:success", ".like-links a", function(event, data) {
     $(this).closest(".like-links").html(data);
   });
 
