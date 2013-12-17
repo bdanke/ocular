@@ -19,7 +19,15 @@
       <li>Tagging Friends in Photos</li>
       <li>Notification of Taggings by Friends</li>
       <li>Messages</li>
-    </ul.>
+    </ul>
+    <% if flash[:errors] && !flash[:errors].empty? %>
+    <br>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li class="error"><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
   </div>
   <div class="signup">
     <%= render partial: "users/new" %>

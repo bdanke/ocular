@@ -26,6 +26,7 @@ html, body, div, input, h2, h1, h3, h4, ul, li, a {
 
 h1 {
   font-weight: bold;
+  color: blue;
   font-size: 45px;
 }
 

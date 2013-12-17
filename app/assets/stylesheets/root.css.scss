@@ -8,6 +8,11 @@
   clear: both;
 }
 
+.error {
+  color: red;
+  font-size: 30px;
+}
+
 body {
   background: #2E9AFE;
 }
@@ -30,7 +35,7 @@ header {
   float: left;
   font-family: sans-serif;
   margin-top: 5px;
-  margin-left: 10px;
+  margin-left: 20px;
   font-size: 50px;
   color: white;
 }

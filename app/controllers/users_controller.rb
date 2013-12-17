@@ -15,7 +15,8 @@ class UsersController < ApplicationController
       self.current_user = @user
       redirect_to new_user_profile_url(@user)
     else
-      render :json => @user.errors.full_messages
+      flash[:errors] = @user.errors.full_messages
+      redirect_to root_url
     end
   end
 
