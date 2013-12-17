@@ -4,29 +4,52 @@ class AlbumsController < ApplicationController
 
   def new
     @photos = current_user.photos
-    if @photos.empty?
-      redirect_to :back
+    if request.xhr?
+      if @photos.empty?
+        render partial: "albums/index", locals: {user: current_user, photo: nil}
+      else
+        render partial: "albums/new", locals: {photos: @photos}
+      end
     else
-      render :new
+      if @photos.empty?
+        redirect_to :back
+      else
+        render :new
+      end
     end
   end
 
   def create
-    user = current_user
     album = Album.new(params[:album])
-    album.owner_id = user.id
-    album.save!
-    redirect_to user_albums_url(user)
+    album.owner_id = current_user.id
+    unless album.photo_album_links.empty?
+      album.save!
+      if request.xhr?
+        render partial: "albums/index", locals: {user: current_user, photo: current_user.photos.first}
+      else
+        redirect_to user_albums_url(current_user)
+      end
+    end
+    redirect_to user_albums_url(current_user)
   end
 
   def index
     @user = User.find(params[:user_id])
     @photo = @user.photos.first
-    render :index
+    if request.xhr?
+      render partial: "albums/index", locals: {user: @user, photo: @photo}
+    else
+      render :index
+    end
   end
 
   def show
     @album = Album.find(params[:id])
-    render :show
+
+    if request.xhr?
+      render partial: "albums/show", locals: {album: @album}
+    else
+      render :show
+    end
   end
 end

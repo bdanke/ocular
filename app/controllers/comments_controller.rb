@@ -5,7 +5,18 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.new(params[:comment])
     comment.owner_id = current_user.id
-    comment.save!
-    redirect_to :back
+    if comment.save
+      if request.xhr?
+        render partial: "comments/show", locals: {comment: comment}
+      else
+        redirect_to :back
+      end
+    else
+      if request.xhr?
+        head :ok
+      else
+        redirect_to :back
+      end
+    end
   end
 end

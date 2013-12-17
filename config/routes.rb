@@ -4,9 +4,6 @@ Ocular::Application.routes.draw do
     collection do
       get "requests"
     end
-    member do
-      get "friends"
-    end
     resources :albums, only: [:index, :show, :destroy]
     resources :photos, only: [:index, :edit, :update, :destroy, :show] do
       resources :tags, only: :create
@@ -25,4 +22,6 @@ Ocular::Application.routes.draw do
   resource :likes, only: [:create, :destroy]
   resources :tags, only: :destroy
   root to: "root#root"
+  match "users/:user_id/friends" => "users#friends", as: "user_friends"
+  match "friendships/:id/deny" => "friendships#deny", as: "deny_friendship"
 end

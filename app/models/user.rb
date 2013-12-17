@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
     statuses = self.newsfeed_statuses
     notifications = self.newsfeed_notifications
     together = statuses.concat(notifications)
-    together.sort! { |a,b| a.created_at <=> b.created_at }
+    together.sort! { |a,b| b.created_at <=> a.created_at }
   end
 
   def wall_posts

@@ -1,0 +1,18 @@
+<% pending_request_friends = current_user.pending_request_friends %>
+
+<% unless pending_request_friends.empty? %>
+<div class="user-list">
+    <h3>Pending Friend Requests</hr>
+    <% pending_request_friends.each do |pending_request_friend| %>
+      <% friendship = Friendship.find_pair(current_user, pending_request_friend) %>
+      <br>
+      <%= pending_request_friend.name.html_safe %>
+      <br>
+      <%= button_to "Accept Friend Request", friendship_url(friendship), method: "put", class: "friend-button", "data-remote" => "true" %>
+      <%= button_to "Delete Friend Request", deny_friendship_url(friendship), method: "delete ", class: "friend-button", "data-remote" => "true" %>
+      <%= button_to "Send Message", new_message_url, method: :get, recipient_id: pending_request_friend.id %>
+    <% end %>
+</div>
+<% else %>
+  <h3>No Friend Requests at this time.</h3>
+<% end %>

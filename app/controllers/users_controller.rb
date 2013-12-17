@@ -4,8 +4,12 @@ class UsersController < ApplicationController
   before_filter :require_self_or_friend!, only: :friends
 
   def index
-    @users = User.all.reject { |user| user == @user }
-    render :index
+    @users = User.all.reject { |user| user == current_user }
+    if request.xhr?
+      render partial: "users/index", locals: {users: @users}
+    else
+      render :index
+    end
   end
 
   def create
@@ -21,13 +25,20 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @user = User.new()
-    render :requests
+    if request.xhr?
+      render partial: "users/requests"
+    else
+      render :requests
+    end
   end
 
   def friends
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @friends = @user.friends
-    render :friends
+    if request.xhr?
+      render partial: "users/friends", locals: {user: @user, friends: @friends}
+    else
+      render :friends
+    end
   end
 end

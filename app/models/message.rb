@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
-  attr_accessible :owner_id, :thread_id, :body, :seen
-  validates :owner_id, :thread_id, :body, :seen, presence: true
-  validates :seen, inclusion: { in: %w(T F) }
+  attr_accessible :owner_id, :thread_id, :body
+  validates :owner_id, :thread_id, :body, presence: true
+  # validates :seen, inclusion: { in: %w(T F) }
 
   belongs_to(
   :user,

@@ -6,9 +6,29 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
+  <header>
+    <div class="header-wrapper">
+      <div class="logo"></div>
+      <%= render partial: "root/header", locals: { user: current_user } %>
+    </div>
+  </header>
 
-<%= yield %>
+  <div class="content group">
+    <div class="left-sidebar">
+      <ul>
+        <li><a href="<%= user_profile_url(current_user) %>" data-remote="true">Profile</a></li>
+        <li><a href="<%= user_newsfeed_url(current_user) %>" data-remote="true">Newsfeed</a></li>
+        <li><a href="<%= user_albums_url(current_user) %>" data-remote="true">Photo Albums</a></li>
+        <li><a href="<%= user_friends_url(current_user) %>" data-remote="true">Friends</a></li>
+        <li><a href="<%= user_message_threads_url(current_user) %>" data-remote="true">Messages</a></li>
+      </ul>
+    </div>
 
+    <div class="middle-content">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

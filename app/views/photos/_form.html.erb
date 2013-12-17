@@ -1,4 +1,4 @@
-<form class="photo-form" action="<%= photos_url %>" enctype="multipart/form-data" method="post">
+<form class="photo-form" data-remote="true" action="<%= photos_url %>" enctype="multipart/form-data" method="post">
   <input
     name="authenticity_token"
     type="hidden"
@@ -8,5 +8,5 @@
   <label for="photo-caption">Optional Caption:</label>
   <input type="text" name="photo[caption]" id="photo-caption">
   <br>
-  <input type="submit" value="Upload Photo!">
+  <input class="photo-submit-button" type="submit" value="Upload Photo!">
 </form>

@@ -272,16 +272,12 @@ header {
   background: white;
 }
 
-.status-links > ul {
-  float: left;
-}
-
 .status-links > ul > li {
   padding-right: 20px;
   float: left;
 }
 
-.comment-list {
+.comment-data {
   background: lightblue;
 }
 
@@ -311,10 +307,6 @@ header {
   background: white;
 }
 
-.comment-footer {
-  float: left;
-}
-
 .comment-footer > ul {
   float: left;
 }
@@ -327,18 +319,43 @@ header {
 // ALBUMS STYLING
 
 .album-header {
-  margin-right: 70px;
-  margin-left: 70px;
+  margin-right: 40px;
+  margin-left: 40px;
 }
 
 .photo-upload-form {
+  //width: 300px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 10px;
   float: left;
 }
 
-.photo-upload-form > form > input {
-  margin-bottom: 5px;
+.photo-submit-button {
+  margin-top: 5px;
+  margin-right: 5px;
+  float: right;
+}
+
+.photo-upload-form > form > input[type="file"] {
+  width: 200px;
 }
 
 .album-button {
   float: right;
+}
+
+.albums > ul > li {
+  float: left;
+}
+
+// LIKES STYLING
+
+.like-links {
+  float: left;
+}
+
+.like-links > ul > li {
+  margin-right: 10px;
+  float: left;
 }

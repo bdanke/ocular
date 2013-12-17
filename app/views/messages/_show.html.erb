@@ -1,0 +1,18 @@
+<% if message.owner_id == current_user.id %>
+  <% friend = current_user %>
+<% else %>
+  <% friend = them %>
+<% end %>
+<li>
+  <div class="user-img">
+    <%= image_tag friend.profile.profile_img.url(:small) %>
+  </div>
+  <div class="user-name">
+    <a href="<%= user_profile_url(friend) %>">
+      <%= friend.name.html_safe %>
+    </a>
+  </div>
+  <div class="message-body">
+    <%= message.body.html_safe %>
+  </div>
+</li>

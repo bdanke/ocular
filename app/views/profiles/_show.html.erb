@@ -1,0 +1,33 @@
+<div class="about-content group">
+  <% profile = user.profile %>
+  <div class="about-img">
+    <%= image_tag profile.profile_img.url(:big) %>
+  </div>
+  <div class="about-list">
+    <ul>
+      <li><h3><%= user.name.html_safe %></h3></li>
+      <li>Birthday: &nbsp;<%= user.bday %></li>
+      <li>Location: &nbsp;<%= profile.location.html_safe %></li>
+      <li>Employer: &nbsp;<%= profile.employer.html_safe %></li>
+      <li>School: &nbsp;<%= profile.school.html_safe %></li>
+      <% if params[:user_id].to_i == current_user.id %>
+      <li><a class="edit-profile-link" href="<%= edit_user_profile_url(current_user) %>" data-remote="true">Edit Your Profile</a></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="about-links">
+    <a href="<%= user_albums_url(user) %>" data-remote="true">Photos</a>
+    <% num_friends = user.friends.count %>
+    <% unless num_friends == 0 %>
+      <a href="<%= friends_user_url(user) %>" data-remote="true"><%= pluralize(num_friends, "Friend") %></a>
+    <% end %>
+  </div>
+</div>
+<div class="status-list">
+  <%= render partial: "statuses/form", locals: { status: @status } %>
+</div>
+<div class="wall-posts">
+  <% user.wall_posts.each do |post| %>
+    <%= render partial: "statuses/show", locals: { status: post }%>
+  <% end %>
+</div>

@@ -1,9 +1,9 @@
-<form action="<%= messages_url %>" method="post">
+<form class="message-form" action="<%= messages_url %>" data-remote="true" method="post">
 	  <input
     name="authenticity_token"
     type="hidden"
     value="<%= form_authenticity_token %>">
 	<textarea name="message[body]" placeholder="Write your message..."></textarea>
-	<input type="hidden" name="recipient_id" value="<%= recipient_id %>">
+	<input type="hidden" name="recipient_id" value="<%= recipient.id %>">
 	<input type="submit" value="Send Message">
 </form>

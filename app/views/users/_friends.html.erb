@@ -1,0 +1,15 @@
+<div class="friends-list">
+  <% unless friends.empty? %>
+    <h3>Friends</h3>
+    <br>
+    <% friends.each do |friend| %>
+      <br>
+      <%= friend.profile.profile_img.url(:small) %>
+      <%= friend.name.html_safe %>
+      <% if user == current_user %>
+        <% friendship = Friendship.find_pair(current_user, friend) %>
+        <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
+        <% end %>
+    <% end %>
+  <% end %>
+</div>

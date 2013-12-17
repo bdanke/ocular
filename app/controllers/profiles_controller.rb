@@ -4,7 +4,6 @@ class ProfilesController < ApplicationController
   before_filter :require_self!, only: [:new, :create, :edit, :update]
 
   def new
-    @user = current_user
     @profile = Profile.new()
     render :new
   end
@@ -23,15 +22,33 @@ class ProfilesController < ApplicationController
 
   def edit
     @profile = current_user.profile
-    render :edit
+    if request.xhr?
+      render partial: "profiles/form", locals: {profile: @profile, method: "edit"}
+    else
+     render :edit
+   end
   end
 
   def update
+    profile = current_user.profile
+    profile.update_attributes(params[:profile])
+    profile.save!
+    @status = Status.new()
+
+    if request.xhr?
+      render partial: "profiles/show", locals: {user: current_user, status: @status}
+    else
+      redirect_to user_profile_url(current_user)
+    end
   end
 
   def show
+    @status = Status.new
     @user = User.find(params[:user_id])
-    @status = Status.new()
-    render :show
+    if request.xhr?
+      render partial: "profiles/show", locals: {user: @user, status: @status}
+    else
+      render :show
+    end
   end
 end

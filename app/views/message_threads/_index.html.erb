@@ -1,0 +1,17 @@
+<h1>Conversations</h1>
+<ul class="messaged-friends-list">
+  <% messaged_friends_with_thread.each do |pair| %>
+    <% friend = pair[0] %>
+    <% thread = pair[1] %>
+    <li>
+      <a href="<%= user_message_thread_url(current_user, thread) %>" data-remote="true">
+        <div class="user-img">
+          <%= image_tag friend.profile.profile_img.url(:small) %>
+        </div>
+        <div class="user-name">
+          <%= friend.name.html_safe %>
+        </div>
+      </a>
+    </li>
+  <% end %>
+</ul>

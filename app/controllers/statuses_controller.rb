@@ -7,9 +7,17 @@ class StatusesController < ApplicationController
     status.owner_id = current_user.id
     status.wall_user_id = params[:user_id] || current_user.id
     if status.save
-      redirect_to :back
+      if request.xhr?
+        render partial: "statuses/show", locals: {status: status}
+      else
+        redirect_to :back
+      end
     else
-      render json: status.errors.full_messages
+      if request.xhr?
+        head :ok
+      else
+        redirect_to :back
+      end
     end
   end
 

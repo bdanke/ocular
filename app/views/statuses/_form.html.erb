@@ -8,7 +8,7 @@
   <% button_text = "Update Status" %>
 <% end %>
 
-<form class="status-form" action="<%= action %>" method="<%= method %>">
+<form class="status-form" data-remote="true" action="<%= action %>" method="<%= method %>">
   <input
     name="authenticity_token"
     type="hidden"

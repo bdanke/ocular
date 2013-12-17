@@ -1,8 +1,8 @@
 <% if method == "post" %>
-  <% url = user_profile_url(user) %>
+  <% url = user_profile_url(current_user) %>
   <% button_text = "Submit Profile" %>
 <% elsif method == "edit" %>
-  <% url = edit_user_profile_url(user) %>
+  <% url = user_profile_url(current_user) %>
   <% button_text = "Update Profile" %>
 <% end %>
 

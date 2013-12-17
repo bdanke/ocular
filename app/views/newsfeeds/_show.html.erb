@@ -1,0 +1,10 @@
+<%= render partial: "statuses/form", locals: {status: status} %>
+<div class="status-list">
+  <% data.each do |datum| %>
+    <% if datum.is_a?(Status) %>
+    <%= render partial: "statuses/show", locals: { status: datum } %>
+    <% elsif datum.is_a?(Notification) %>
+    <%= render partial: "notifications/show", locals: { notification: datum }%>
+    <% end %>
+  <% end %>
+</div>

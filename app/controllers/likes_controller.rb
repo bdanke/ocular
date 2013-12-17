@@ -8,11 +8,26 @@ class LikesController < ApplicationController
     like.object_type = params[:object_type]
     like.object_id = params[:object_id]
     like.save!
-    redirect_to :back
+    object = like.object_type.constantize.find(like.object_id)
+
+    if request.xhr?
+      puts "XHR CREATE!!!!"
+      render partial: "likes/show", locals: {object: object}
+    else
+      redirect_to :back
+    end
   end
 
   def destroy
-    Like.find(params[:like_id]).destroy
-    redirect_to :back
+    like = Like.find(params[:like_id])
+    object = like.object_type.constantize.find(like.object_id)
+    like.destroy
+
+    if request.xhr?
+      puts "XHR DESTROY!!!!!!"
+      render partial: "likes/show", locals: {object: object}
+    else
+      redirect_to :back
+    end
   end
 end

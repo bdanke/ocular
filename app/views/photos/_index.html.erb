@@ -1,0 +1,18 @@
+<div class="photos">
+  <h3>Photos:</h3>
+  <br>
+  <ul>
+    <% photos.each do |photo| %>
+      <li>
+        <a href="<%= user_photo_url(user, photo) %>" data-remote="true">
+          <figure>
+            <% if photo.caption %>
+              <figcaption><%= photo.caption.html_safe %></figcaption>
+            <% end %>
+            <%= image_tag photo.img.url(:medium) %>
+          </figure>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</div>

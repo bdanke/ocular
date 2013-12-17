@@ -1,0 +1,46 @@
+<div class="photo">
+  <% if photo.caption %>
+    <h3><%= photo.caption.html_safe %></h3>
+  <% end %>
+  <br>
+  <%= image_tag photo.img.url %>
+  <% tags = photo.tags %>
+  <% self_tag = tags.where("user_id = ?", current_user.id) %>
+  <% tagged_users = tags.map { |tag| User.find(tag.user_id) } %>
+  <% unless tags.empty? %>
+    <% unless self_tag.empty? %>
+      <br>
+      <%= button_to "Remove your tag", tag_url(self_tag), method: :delete %>
+    <% end %>
+    <br>
+    <h4>Tagged in this photo:</h4>
+    <br>
+    <ul class="tagged-list">
+      <% tagged_users.each do |user| %>
+        <li class="tag-item">
+          <a href="<%= user_profile_url(user) %>">
+            <%= user.name.html_safe %>
+          </a>
+        <li>
+      <% end %>
+    </ul>
+    <br>
+  <% end %>
+  <% if user == current_user %>
+    <% friends = current_user.friends %>
+    <% unless friends.empty? %>
+      <% friends.each do |friend| %>
+        <% unless tagged_users.include?(friend) %>
+          <form action="<%= user_photo_tags_url(@user, photo) %>" method="post">
+            <input
+              name="authenticity_token"
+              type="hidden"
+              value="<%= form_authenticity_token %>">
+            <input type="hidden" name="tagged_user_id" value="<%= friend.id %>">
+            <input type="submit" value="<%= "Tag " + friend.name.html_safe + "!" %>">
+          </form>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

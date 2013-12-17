@@ -1,0 +1,21 @@
+<% object_type ||= params[:object_type] %>
+<% if object_type == "Status" %>
+  <% like = Like.find_by_data(current_user.id, "Status", object.id) %>
+<% elsif object_type == "Comment" %>
+  <% like = Like.find_by_data(current_user.id, "Comment", object.id) %>
+<% end %>
+<ul>
+  <li>
+    <% if like %>
+      <%= link_to "Unlike", likes_url(like_id: like.id, user_id: params[:user_id]), method: :delete, "data-remote" => "true" %>
+    <% else %>
+      <%= link_to "Like", likes_url( object_type: object.class.to_s, object_id: object.id, user_id: params[:user_id]), method: :post, "data-remote" => "true" %>
+    <% end %>
+  </li>
+  <li>
+    <% like_count = Like.like_count_by_object(object) %>
+    <% if like_count != 0%>
+      <%= pluralize(like_count, "Like") %>
+    <% end %>
+  </li>
+</ul>

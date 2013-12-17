@@ -1,0 +1,34 @@
+<div class="album-header group">
+  <% if user == current_user %>
+    <div class="photo-upload-form">
+      <%= render partial: "photos/form" %>
+    </div>
+    <div class="album-button">
+      <%= button_to "Create Album", new_album_url, method: :get, "data-remote" => "true" %>
+    </div>
+  <% end %>
+</div>
+<div class="albums">
+  <% if photo %>
+    <ul>
+      <li>
+        <a href="<%= user_photos_url(user) %>" data-remote="true">
+          <figure>
+            <figcaption>All Photos</figcaption>
+            <%= image_tag photo.img.url(:medium) %>
+          </figure>
+        </a>
+      </li>
+      <% user.albums.each do |album| %>
+        <li>
+          <a href="<%= user_album_url(user, album) %>" data-remote="true">
+            <figure>
+              <figcaption><%= album.title.html_safe %></figcaption>
+              <%= image_tag album.photos.first.img.url(:medium) %>
+            </figure>
+          <a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
