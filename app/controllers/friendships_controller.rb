@@ -19,7 +19,7 @@ class FriendshipsController < ApplicationController
     friendship = Friendship.find(params[:id])
     friendship.pending_flag = "F"
     friendship.save!
-
+    Notification.create({ user_id: current_user.id, notifiable_id: friendship.id, notifiable_type: "Friendship"})
     if request.xhr?
       render partial: "users/requests"
     else

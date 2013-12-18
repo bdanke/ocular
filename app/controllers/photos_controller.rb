@@ -5,12 +5,19 @@ class PhotosController < ApplicationController
   def create
     photo = Photo.new(params[:photo])
     photo.owner_id = current_user.id
-    photo.save!
-
-    if request.xhr?
-      render partial: "photos/show", locals: {user: current_user, photo: photo}
+    if photo.save!
+      Notification.create({ user_id: current_user.id, notifiable_id: photo.id, notifiable_type: "Photo"})
+      if request.xhr?
+        render partial: "photos/show", locals: {user: current_user, photo: photo}
+      else
+        redirect_to user_photo_url(current_user, photo)
+      end
     else
-      redirect_to user_photo_url(current_user, photo)
+      if request.xhr?
+        render partial: "albums/index", locals: {user: current_user, photo: current_user.photos.first}
+      else
+        redirect_to :back
+      end
     end
   end
 

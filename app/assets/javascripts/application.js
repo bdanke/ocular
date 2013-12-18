@@ -16,22 +16,20 @@
 
 $(document).ready(function(event) {
   $(".signed-in-header-links").on("ajax:success", "a", function(event, data) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
     $(".middle-content").html(data);
   });
 
   $(".left-sidebar").on("ajax:success", "a", function(event, data) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
     $(".middle-content").html(data);
   });
 
-  // $("a").on("ajax:success", function(event, data) {
-  //   $(".middle-content").html(data);
-  // });
-
-  // $(".middle-content").on("ajax:success", "a", function(event, data) {
-  //   $(".middle-content").html(data);
-  // });
-
-  $("messaged-friends-list").on("ajax:success", function(event, data) {
+  $(".middle-content").on("ajax:success", ".messaged-friends-list a", function(event, data) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
     $(".middle-content").html(data);
   })
 
@@ -42,7 +40,7 @@ $(document).ready(function(event) {
     $form[0].reset();
   });
 
-  $(".status .comment-data").on("ajax:success", ".comment-form", function(event, data) {
+  $(".middle-content").on("ajax:success", ".comment-form", function(event, data) {
     var $form = $(this);
     var $list = $form.parent().children(".comment-list");
     $list.append(data);
@@ -62,15 +60,20 @@ $(document).ready(function(event) {
   });
 
   $(".middle-content").on("ajax:success", ".about-links a", function(event, data) {
-    console.log("HERE");
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
     $(".middle-content").html(data);
   });
 
   $(".middle-content").on("ajax:success", ".photos a", function(event, data) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
     $(".middle-content").html(data);
   });
 
   $(".middle-content").on("ajax:success", ".albums a", function(event, data) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
     $(".middle-content").html(data);
   });
 

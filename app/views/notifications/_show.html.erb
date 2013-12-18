@@ -1,12 +1,86 @@
-<% owner = User.find(notification.user_id) %>
-<% tagged = User.find(notification.tagged_user_id) %>
-<% photo = Photo.find(notification.photo_id) %>
 <div class="notification">
-  <% if tagged == current_user %>
-  <%= owner.name.html_safe + "tagged you in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
-  <% elsif owner == tagged %>
-  <%= owner.name.html_safe + "tagged themself in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
+<% case notification.notifiable_type %>
+<% when "Status" %>
+  <% status = notification.notifiable %>
+  <% owner = status.user %>
+  <% if status.wall_user_id == current_user.id %>
+    <%= owner.name.html_escape + " posted on your wall." %>
+  <% elsif status.wall_user_id == status.owner_id %>
+    <%= owner.name.html_escape + " updated their status." %>
   <% else %>
-  <%= owner.name.html_safe + "tagged #{tagged.name} in a <a href='#{user_photo_url(photo.user, photo)}'>photo</a>" %>
+    <% user = User.find(status.wall_user_id) %>
+    <%= owner.name.html_escape + " posted on " + user.name.html_escape + "'s wall." %>
   <% end %>
+<% when "Comment" %>
+  <% comment = notification.notifiable %>
+  <% owner = comment.user %>
+  <% case comment.object_type %>
+  <% when "Status" %>
+    <% status = Status.find(comment.object_id) %>
+    <% if status.owner_id == current_user.id %>
+      <%= owner.name.html_escape + " commented on your status." %>
+    <% elsif status.owner_id == comment.owner_id %>
+      <%= owner.name.html_escape + " commented on their status." %>
+    <% else %>
+      <% user = User.find(status.owner_id) %>
+      <%= owner.name.html_escape + " commented on " + user.name.html_escape + "'s status." %>
+    <% end %>
+  <% when "Photo" %>
+    <% photo = Photo.find(comment.object_id) %>
+    <% if photo.owner_id == current_user.id %>
+      <%= (owner.name.html_escape + " commented on your <a href='#{user_photo_url(current_user, photo)}>photo</a>.").html_safe %>
+    <% else %>
+      <% user = User.find(photo.owner_id) %>
+      <%= (owner.name.html_escape + " commented on " + user.name.html_escape + "'s <a href='#{user_photo_url(user, photo)}>photo</a>.").html_safe %>
+    <% end %>
+  <% end %>
+<% when "Friendship" %>
+  <% friendship = notification.notifiable %>
+  <% in_friend = friendship.in_friend %>
+  <% out_friend = friendship.out_friend %>
+  <%= in_friend.name.html_escape + " is now friends with " + out_friend.name.html_escape + "." %>
+<% when "Like" %>
+  <% like = notification.notifiable %>
+  <% owner = like.user %>
+  <% case like.object_type %>
+  <% when "Status" %>
+    <% status = Status.find(like.object_id) %>
+    <% if status.owner_id == current_user.id %>
+      <%= owner.name.html_escape + " liked your status." %>
+    <% else %>
+      <% user = User.find(status.owner_id) %>
+      <%= owner.name.html_escape + " liked " + user.name.html_escape + "'s status." %>
+    <% end %>
+  <% when "Comment" %>
+    <% comment = Comment.find(like.object_id) %>
+    <% if comment.owner_id == current_user.id %>
+      <%= owner.name.html_escape + " liked your comment." %>
+    <% else %>
+      <% user = User.find(comment.owner_id) %>
+      <%= owner.name.html_escape + " liked " + user.name.html_escape + "'s comment." %>
+    <% end %>
+  <% when "Photo" %>
+    <% photo = Photo.find(like.object_id) %>
+    <% if photo.owner_id == current_user.id %>
+      <%= (owner.name.html_escape + " liked your <a href='#{user_photo_url(current_user, photo)}>photo</a>.").html_safe %>
+    <% else %>
+      <% user = User.find(photo.owner_id) %>
+      <%= (owner.name.html_escape + " liked " + user.name.html_escape + "'s <a href='#{user_photo_url(user, photo)}>photo</a>.").html_safe %>
+    <% end %>
+  <% end %>
+<% when "Photo" %>
+  <% photo = notification.notifiable %>
+  <% owner = photo.user %>
+  <%= (owner.name.html_escape + " posted a <a href='#{user_photo_url(photo, owner)}'>photo</a>.").html_safe %>
+<% when "Tag" %>
+  <% tag = notification.notifiable %>
+  <% owner = tag.user %>
+  <% photo = tag.photo %>
+  <% if tag.tagged_user == current_user %>
+    <%= (owner.name.html_escape + " tagged you in a <a href='#{user_photo_url(photo.user,photo)}'>photo</a>.").html_safe %>
+  <% else %>
+    <% tagged_user = tag.tagged_user %>
+    <%= (owner.name.html_escape + " tagged " + tagged_user.name.html_escape + "in a <a href='#{user_photo_url(photo.user,photo)}'>photo</a>.").html_safe %>
+  <% end %>
+<% end %>
 </div>

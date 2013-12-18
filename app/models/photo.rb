@@ -25,5 +25,11 @@ class Photo < ActiveRecord::Base
     foreign_key: :photo_id,
     primary_key: :id)
 
+  has_one :notification, as: :notifiable
+
   has_many :albums, through: :photo_album_links, source: :album_id
+
+  def caption
+    h(self.caption)
+  end
 end

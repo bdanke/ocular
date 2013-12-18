@@ -6,7 +6,7 @@
   </div>
   <div class="comment-body">
     <%= link_to "#{owner.name}:", user_profile_url(owner) %>
-    <%= comment.body.html_safe %>
+    <%= comment.body.html_escape %>
   </div>
   <div class="like-links group">
     <%= render partial: "likes/show", locals: { object: comment, object_type: "Comment"} %>

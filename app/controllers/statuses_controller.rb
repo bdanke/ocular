@@ -7,6 +7,7 @@ class StatusesController < ApplicationController
     status.owner_id = current_user.id
     status.wall_user_id = params[:user_id] || current_user.id
     if status.save
+      Notification.create({user_id: current_user.id, notifiable_id: status.id, notifiable_type: "Status"})
       if request.xhr?
         render partial: "statuses/show", locals: {status: status}
       else

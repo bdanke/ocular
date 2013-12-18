@@ -1,5 +1,5 @@
 <div class="photos">
-  <h3><%= album.title.html_safe %></h3>
+  <h3><%= album.title.html_escape %></h3>
   <br>
   <ul>
     <% album.photos.each do |photo| %>
@@ -7,7 +7,7 @@
         <a href="<%= user_photo_url(params[:user_id], photo) %>" data-remote="true">
         <figure>
           <% if photo.caption %>
-            <figcaption><%= photo.caption.html_safe %></figcaption>
+            <figcaption><%= photo.caption.html_escape %></figcaption>
           <% end %>
           <%= image_tag photo.img.url %>
         </figure>

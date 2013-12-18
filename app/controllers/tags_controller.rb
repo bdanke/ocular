@@ -10,12 +10,9 @@ class TagsController < ApplicationController
       tag = Tag.new()
       tag.photo_id = photo.id
       tag.user_id = friend.id
+      tag.owner_id = current_user.id
       tag.save!
-      notification = Notification.new()
-      notification.user_id = current_user.id
-      notification.tagged_user_id = friend.id
-      notification.photo_id = photo.id
-      notifaction.save!
+      Notification.create({ user_id: current_user.id, notifiable_id: tag.id, notifiable_type: "Tag"})
       redirect_to user_photo_url(params[:user_id], params[:photo_id])
     else
       redirect_to :back

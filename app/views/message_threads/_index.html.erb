@@ -9,7 +9,7 @@
           <%= image_tag friend.profile.profile_img.url(:small) %>
         </div>
         <div class="user-name">
-          <%= friend.name.html_safe %>
+          <%= friend.name.html_escape %>
         </div>
       </a>
     </li>

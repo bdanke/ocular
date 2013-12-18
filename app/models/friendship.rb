@@ -18,6 +18,8 @@ class Friendship < ActiveRecord::Base
   foreign_key: :out_friend_id,
   primary_key: :id)
 
+  has_one :notification, as: :notifiable
+
   def self.find_pair(user1, user2)
     query = <<-END
     SELECT *

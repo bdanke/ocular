@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20131215182007) do
   create_table "messages", :force => true do |t|
     t.integer  "owner_id",   :null => false
     t.integer  "thread_id",  :null => false
+    t.string   "seen",       :null => false
     t.text     "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -80,14 +81,13 @@ ActiveRecord::Schema.define(:version => 20131215182007) do
   add_index "messages", ["thread_id"], :name => "index_messages_on_thread_id"
 
   create_table "notifications", :force => true do |t|
-    t.integer  "user_id",        :null => false
-    t.integer  "tagged_user_id", :null => false
-    t.integer  "photo_id",       :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "user_id",         :null => false
+    t.integer  "notifiable_id",   :null => false
+    t.string   "notifiable_type", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "notifications", ["tagged_user_id"], :name => "index_notifications_on_tagged_user_id"
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "photo_album_links", :force => true do |t|
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20131215182007) do
   add_index "statuses", ["wall_user_id"], :name => "index_statuses_on_wall_user_id"
 
   create_table "tags", :force => true do |t|
+    t.integer  "owner_id",   :null => false
     t.integer  "photo_id",   :null => false
     t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false

@@ -15,6 +15,8 @@ class Status < ActiveRecord::Base
   foreign_key: :object_id,
   primary_key: :id)
 
+  has_one :notification, as: :notifiable
+
   def comments
     query = <<-END
     SELECT *
@@ -23,5 +25,9 @@ class Status < ActiveRecord::Base
     ORDER BY created_at
     END
     Comment.find_by_sql(query)
+  end
+
+  def body
+    h(self.body)
   end
 end

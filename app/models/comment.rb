@@ -9,4 +9,10 @@ class Comment < ActiveRecord::Base
   class_name: "User",
   foreign_key: :owner_id,
   primary_key: :id)
+
+  has_one :notification, as: :notifiable
+
+  def body
+    h(self.body)
+  end
 end

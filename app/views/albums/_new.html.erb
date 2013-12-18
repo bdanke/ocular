@@ -16,7 +16,7 @@
       <label for="<%= 'photo-#{photo.id}' %>">
         <figure>
           <% if photo.caption %>
-            <figcaption><%= photo.caption.html_safe %></figcaption>
+            <figcaption><%= photo.caption.html_escape %></figcaption>
           <% end %>
           <%= image_tag photo.img.url(:medium) %>
         </figure>

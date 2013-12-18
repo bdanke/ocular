@@ -11,6 +11,8 @@ class Like < ActiveRecord::Base
   foreign_key: :owner_id,
   primary_key: :id)
 
+  has_one :notification, as: :notifiable
+
   def self.find_by_data(owner_id, object_type, object_id)
     query = <<-END
     SELECT *

@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     comment = Comment.new(params[:comment])
     comment.owner_id = current_user.id
     if comment.save
+      Notification.create({ user_id: current_user.id, notifiable_id: comment.id, notifiable_type: "Comment"})
       if request.xhr?
         render partial: "comments/show", locals: {comment: comment}
       else

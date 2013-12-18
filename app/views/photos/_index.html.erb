@@ -7,7 +7,7 @@
         <a href="<%= user_photo_url(user, photo) %>" data-remote="true">
           <figure>
             <% if photo.caption %>
-              <figcaption><%= photo.caption.html_safe %></figcaption>
+              <figcaption><%= photo.caption.html_escape %></figcaption>
             <% end %>
             <%= image_tag photo.img.url(:medium) %>
           </figure>

@@ -15,4 +15,8 @@ class Album < ActiveRecord::Base
   primary_key: :id)
 
   has_many :photos, through: :photo_album_links, source: :photo
+
+  def title
+    h(self.title)
+  end
 end

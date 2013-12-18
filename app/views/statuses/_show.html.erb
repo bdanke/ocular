@@ -7,18 +7,18 @@
     </div>
     <div class="status-content">
       <a href="<%= user_profile_url(owner) %>">
-        <%= owner.name.html_safe %>
+        <%= owner.name.html_escape %>
       </a>
       <% unless status.owner_id == status.wall_user_id %>
         <% about_user = User.find(status.wall_user_id) %>
         &nbsp;>>&nbsp;
         <a href="<%= user_profile_url(about_user) %>">
-          <%= about_user.name.html_safe %>
+          <%= about_user.name.html_escape %>
         </a>
       <% end %>
 
       <div class="status-body">
-        <%= status.body.html_safe %>
+        <%= status.body.html_escape %>
       </div>
       <div class="like-links group">
         <%= render partial: "likes/show", locals: {object: status, object_type: "Status"} %>

@@ -5,11 +5,24 @@
     <% friends.each do |friend| %>
       <br>
       <%= friend.profile.profile_img.url(:small) %>
-      <%= friend.name.html_safe %>
+      <%= friend.name.html_escape %>
       <% if user == current_user %>
-        <% friendship = Friendship.find_pair(current_user, friend) %>
-        <%= button_to "Unfriend", friendship_url(friendship), method: "delete" %>
-        <% end %>
+        <form class="friend-button" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
+          <input
+            name="authenticity_token"
+            type="hidden"
+            value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Unfriend">
+        </form>
+      <% elsif !(current_user.friends.include?(friend) || current_user.pending_request_friends.include?(friend) || current_user.pending_friends.include?(friend)) %>
+        <form class="friend-button" action="<%= user_friendship_url(friend) %>" data-remote="true" method="post">
+          <input
+            name="authenticity_token"
+            type="hidden"
+            value="<%= form_authenticity_token %>">
+          <input type="submit" value="Friend Request">
+        </form>
     <% end %>
   <% end %>
 </div>

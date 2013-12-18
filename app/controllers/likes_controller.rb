@@ -9,9 +9,8 @@ class LikesController < ApplicationController
     like.object_id = params[:object_id]
     like.save!
     object = like.object_type.constantize.find(like.object_id)
-
+    Notification.create({ user_id: current_user.id, notifiable_id: like.id, notifiable_type: "Like"})
     if request.xhr?
-      puts "XHR CREATE!!!!"
       render partial: "likes/show", locals: {object: object}
     else
       redirect_to :back
@@ -24,7 +23,6 @@ class LikesController < ApplicationController
     like.destroy
 
     if request.xhr?
-      puts "XHR DESTROY!!!!!!"
       render partial: "likes/show", locals: {object: object}
     else
       redirect_to :back

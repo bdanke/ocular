@@ -9,10 +9,10 @@
   </div>
   <div class="user-name">
     <a href="<%= user_profile_url(friend) %>">
-      <%= friend.name.html_safe %>
+      <%= friend.name.html_escape %>
     </a>
   </div>
   <div class="message-body">
-    <%= message.body.html_safe %>
+    <%= message.body.html_escape %>
   </div>
 </li>
