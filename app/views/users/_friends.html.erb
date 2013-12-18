@@ -5,7 +5,7 @@
     <% friends.each do |friend| %>
       <br>
       <%= friend.profile.profile_img.url(:small) %>
-      <%= friend.name.html_escape %>
+      <%= friend.name %>
       <% if user == current_user %>
         <form class="friend-button" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
           <input

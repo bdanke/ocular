@@ -9,12 +9,6 @@ class Status < ActiveRecord::Base
   foreign_key: :owner_id,
   primary_key: :id)
 
-  has_many(
-  :likes,
-  class_name: "Like",
-  foreign_key: :object_id,
-  primary_key: :id)
-
   has_one :notification, as: :notifiable
 
   def comments
@@ -25,9 +19,5 @@ class Status < ActiveRecord::Base
     ORDER BY created_at
     END
     Comment.find_by_sql(query)
-  end
-
-  def body
-    h(self.body)
   end
 end

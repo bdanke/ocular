@@ -15,16 +15,4 @@ class Profile < ActiveRecord::Base
   class_name: "User",
   foreign_key: :owner_id,
   primary_key: :id)
-
-  def school
-    h(self.school)
-  end
-
-  def employer
-    h(self.employer)
-  end
-
-  def location
-    h(self.location)
-  end
 end

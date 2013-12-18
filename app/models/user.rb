@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    h(self.fname + " " + self.lname)
+    self.fname + " " + self.lname
   end
 
   def friends

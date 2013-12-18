@@ -14,8 +14,4 @@ class Message < ActiveRecord::Base
   class_name: "MessageThread",
   foreign_key: :thread_id,
   primary_key: :id)
-
-  def body
-    h(self.body)
-  end
 end

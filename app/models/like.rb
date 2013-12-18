@@ -3,7 +3,7 @@ class Like < ActiveRecord::Base
 
   validates :owner_id, :object_type, :object_id, presence: true
   validates :owner_id, uniqueness: { scope: [:object_type, :object_id] }
-  validates :object_type, inclusion: { in: %w(Status Comment) }
+  validates :object_type, inclusion: { in: %w(Status Comment Photo) }
 
   belongs_to(
   :user,

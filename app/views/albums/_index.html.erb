@@ -23,7 +23,7 @@
         <li>
           <a href="<%= user_album_url(user, album) %>" data-remote="true">
             <figure>
-              <figcaption><%= album.title.html_escape %></figcaption>
+              <figcaption><%= album.title %></figcaption>
               <%= image_tag album.photos.first.img.url(:medium) %>
             </figure>
           <a>

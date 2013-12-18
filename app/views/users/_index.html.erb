@@ -10,7 +10,7 @@
       <div class="user group">
         <br>
         <%= image_tag user.profile.profile_img.url(:small) %>
-        <%= user.name.html_escape %>
+        <%= user.name %>
         <br>
         <% if pending_friends.include?(user) %>
           <% friendship = Friendship.find_pair(current_user, user) %>

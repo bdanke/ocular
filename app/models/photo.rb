@@ -29,7 +29,13 @@ class Photo < ActiveRecord::Base
 
   has_many :albums, through: :photo_album_links, source: :album_id
 
-  def caption
-    h(self.caption)
+  def comments
+    query = <<-END
+    SELECT *
+    FROM comments
+    WHERE object_type LIKE 'Photo' AND object_id = #{self.id}
+    ORDER BY created_at
+    END
+    Comment.find_by_sql(query)
   end
 end

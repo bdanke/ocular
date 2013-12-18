@@ -6,7 +6,7 @@
     <% pending_request_friends.each do |pending_request_friend| %>
       <% friendship = Friendship.find_pair(current_user, pending_request_friend) %>
       <br>
-      <%= pending_request_friend.name.html_escape %>
+      <%= pending_request_friend.name %>
       <br>
 
       <form class="friend-button" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
