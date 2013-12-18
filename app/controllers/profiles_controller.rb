@@ -45,7 +45,7 @@ class ProfilesController < ApplicationController
   def show
     @status = Status.new
     @user = User.find(params[:user_id])
-    if request.headers['X-PJAX']
+    if request.headers["X-PJAX"]
       render partial: "profiles/show", locals: {user: @user, status: @status}
     else
       render :show

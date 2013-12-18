@@ -36,7 +36,7 @@ class AlbumsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @photo = @user.photos.first
-    if request.xhr?
+    if request.headers["X-PJAX"]
       render partial: "albums/index", locals: {user: @user, photo: @photo}
     else
       render :index
@@ -46,7 +46,7 @@ class AlbumsController < ApplicationController
   def show
     @album = Album.find(params[:id])
 
-    if request.xhr?
+    if request.headers["X-PJAX"]
       render partial: "albums/show", locals: {album: @album}
     else
       render :show

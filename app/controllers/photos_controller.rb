@@ -36,7 +36,7 @@ class PhotosController < ApplicationController
     @user = User.find(params[:user_id])
     @photo = Photo.find(params[:id])
 
-    if request.xhr?
+    if request.headers["X-PJAX"]
       render partial: "photos/show", locals: {user: @user, photo: @photo}
     else
       render :show

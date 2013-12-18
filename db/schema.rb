@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(:version => 20131215182007) do
   create_table "messages", :force => true do |t|
     t.integer  "owner_id",   :null => false
     t.integer  "thread_id",  :null => false
-    t.string   "seen",       :null => false
     t.text     "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

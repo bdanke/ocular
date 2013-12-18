@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_filter :require_self_or_friend!
+  before_filter :require_self_or_friend!, only: :create
 
 	def create
     friends = current_user.friends
@@ -18,4 +18,24 @@ class TagsController < ApplicationController
       redirect_to :back
     end
 	end
+
+  def destroy
+    tag = Tag.find(params[:id])
+    photo = Photo.find(tag.photo_id)
+    owner = photo.user
+    if tag.user_id == current_user.id
+      tag.destroy
+      if request.xhr?
+        render partial: "photos/show", locals: {user: owner, photo: photo}
+      else
+        redirect_to :back
+      end
+    else
+      if request.xhr?
+        render partial: "photos/show", locals: {user: owner, photo: photo}
+      else
+        redirect_to :back
+      end
+    end
+  end
 end

@@ -13,25 +13,33 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require_tree ../../../vendor/assets/javascripts
+
+$(document).pjax(".signed-in-header-links a", ".middle-content")
+$(document).pjax(".left-sidebar a", ".middle-content")
+$(document).pjax(".messaged-friends-list a", ".middle-content")
+$(document).pjax(".about-links a", ".middle-content")
+$(document).pjax(".photos a", ".middle-content")
+$(document).pjax(".albums a", ".middle-content")
 
 $(document).ready(function(event) {
-  $(".signed-in-header-links").on("ajax:success", "a", function(event, data) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    $(".middle-content").html(data);
-  });
-
-  $(".left-sidebar").on("ajax:success", "a", function(event, data) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    $(".middle-content").html(data);
-  });
-
-  $(".middle-content").on("ajax:success", ".messaged-friends-list a", function(event, data) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    $(".middle-content").html(data);
-  })
+//   $(".signed-in-header-links").on("ajax:success", "a", function(event, data) {
+//     var href = $(this).attr("href");
+//     history.pushState(null, null, href);
+//     $(".middle-content").html(data);
+//   });
+//
+//   $(".left-sidebar").on("ajax:success", "a", function(event, data) {
+//     var href = $(this).attr("href");
+//     history.pushState(null, null, href);
+//     $(".middle-content").html(data);
+//   });
+//
+//   $(".middle-content").on("ajax:success", ".messaged-friends-list a", function(event, data) {
+//     var href = $(this).attr("href");
+//     history.pushState(null, null, href);
+//     $(".middle-content").html(data);
+//   })
 
   $(".middle-content").on("ajax:success", ".status-form", function(event, data) {
     var $form = $(this);
@@ -58,24 +66,24 @@ $(document).ready(function(event) {
   $(".middle-content").on("ajax:success", ".like-links a", function(event, data) {
     $(this).closest(".like-links").html(data);
   });
-
-  $(".middle-content").on("ajax:success", ".about-links a", function(event, data) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    $(".middle-content").html(data);
-  });
-
-  $(".middle-content").on("ajax:success", ".photos a", function(event, data) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    $(".middle-content").html(data);
-  });
-
-  $(".middle-content").on("ajax:success", ".albums a", function(event, data) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    $(".middle-content").html(data);
-  });
+//
+//   $(".middle-content").on("ajax:success", ".about-links a", function(event, data) {
+//     var href = $(this).attr("href");
+//     history.pushState(null, null, href);
+//     $(".middle-content").html(data);
+//   });
+//
+//   $(".middle-content").on("ajax:success", ".photos a", function(event, data) {
+//     var href = $(this).attr("href");
+//     history.pushState(null, null, href);
+//     $(".middle-content").html(data);
+//   });
+//
+//   $(".middle-content").on("ajax:success", ".albums a", function(event, data) {
+//     var href = $(this).attr("href");
+//     history.pushState(null, null, href);
+//     $(".middle-content").html(data);
+//   });
 
   $(".album-button").on("ajax:success", function(event, data) {
     $(".middle-content").html(data);

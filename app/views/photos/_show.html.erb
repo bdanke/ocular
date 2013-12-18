@@ -14,13 +14,24 @@
     <% unless self_tag.nil? %>
       <br>
       <%= button_to "Remove your tag", tag_url(self_tag), method: :delete %>
+
+      <form class="tag-form" action="<%= tag_url(self_tag) %>" data-remote="true" method="post">
+        <input
+          name="authenticity_token"
+          type="hidden"
+          value="<%= form_authenticity_token %>">
+        <input type="hidden" name="tagged_user_id" value="<%= current_user.id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="<%= "Remove Your Tag" %>">
+      </form>
+
     <% end %>
     <br>
   <% end %>
   <% if user == current_user %>
     <% friends = current_user.friends %>
     <% if self_tag.nil? %>
-      <form action="<%= user_photo_tags_url(@user, photo) %>" method="post">
+      <form class="tag-form" action="<%= user_photo_tags_url(user, photo) %>" data-remote="true" method="post">
         <input
           name="authenticity_token"
           type="hidden"
@@ -32,7 +43,7 @@
     <% unless friends.empty? %>
       <% friends.each do |friend| %>
         <% unless tagged_users.include?(friend) %>
-          <form action="<%= user_photo_tags_url(@user, photo) %>" method="post">
+          <form class="tag-form" action="<%= user_photo_tags_url(@user, photo) %>" data-remote="true" method="post">
             <input
               name="authenticity_token"
               type="hidden"

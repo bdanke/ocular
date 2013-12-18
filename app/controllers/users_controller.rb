@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def requests
-    if request.xhr?
+    if request.headers["X-PJAX"]
       render partial: "users/requests"
     else
       render :requests
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def friends
     @user = User.find(params[:user_id])
     @friends = @user.friends
-    if request.xhr?
+    if request.headers["X-PJAX"]
       render partial: "users/friends", locals: {user: @user, friends: @friends}
     else
       render :friends

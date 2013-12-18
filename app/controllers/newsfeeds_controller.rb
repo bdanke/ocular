@@ -4,8 +4,7 @@ class NewsfeedsController < ApplicationController
   def show
     @data = current_user.newsfeed_data
     @status = Status.new()
-    if request.xhr?
-      puts "HERE!!!"
+    if request.headers["X-PJAX"]
       render partial: "newsfeeds/show", locals: {data: @data, status: @status}
     else
       render :show

@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
       if thread
         render partial: "message_threads/show", locals: {thread: thread, them: recipient}
       else
-        render partial: "message/new", locals: {recipient: @recipient}
+        render partial: "messages/form", locals: {recipient: @recipient}
       end
     else
       if thread
