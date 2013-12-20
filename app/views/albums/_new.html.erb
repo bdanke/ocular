@@ -1,26 +1,32 @@
 <div class="album-form">
+  <h2>Create a Photo Album!</h2>
   <form action="<%= albums_url %>" method="post">
     <input
       name="authenticity_token"
       type="hidden"
       value="<%= form_authenticity_token %>">
-    <label>Album Title:
+    <label><strong>Album Title:</strong>
     <br>
     <input type="text" name="album[title]">
     </label>
-    <br>
+    <br><br>
     <h3>Add Photos to Album:</h3>
     <br>
+    <div class="group">
     <% photos.each do |photo| %>
-      <input type="checkbox" name="album[photo_ids][]" id="<%= 'photo-#{photo.id}' %>" value="<%= photo.id %>">
-      <label for="<%= 'photo-#{photo.id}' %>">
-        <figure>
-          <% if photo.caption %>
-            <figcaption><%= photo.caption %></figcaption>
-          <% end %>
-          <%= image_tag photo.img.url(:medium) %>
-        </figure>
+      <div class="photo-select">
+        <input type="checkbox" name="album[photo_ids][]" id="<%= 'photo-#{photo.id}' %>" value="<%= photo.id %>">
+        <label for="<%= 'photo-#{photo.id}' %>">
+          <figure>
+            <% if photo.caption %>
+              <figcaption><%= photo.caption %></figcaption>
+            <% end %>
+            <%= image_tag photo.img.url(:medium) %>
+          </figure>
+        </label>
+      </div>
     <% end %>
+    </div>
     <input type="submit" value="Create Album">
   </form>
 </div>
