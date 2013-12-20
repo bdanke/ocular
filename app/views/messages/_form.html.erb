@@ -1,9 +1,15 @@
-<form class="message-form" action="<%= messages_url %>" data-remote="true" method="post">
+<div class="conversations">
+  <h2><%= "Message to #{recipient.name}: "%></h2>
+  <form class="message-form" action="<%= messages_url %>" data-remote="true" method="post">
 	  <input
     name="authenticity_token"
     type="hidden"
     value="<%= form_authenticity_token %>">
-	<textarea name="message[body]" placeholder="Write your message..."></textarea>
-	<input type="hidden" name="recipient_id" value="<%= recipient.id %>">
-	<input type="submit" value="Send Message">
-</form>
+    <div class="message-form group">
+    	<textarea class="message-submit-data" name="message[body]" placeholder="Write your message..."></textarea>
+    	<input type="hidden" name="recipient_id" value="<%= recipient.id %>">
+      <br>
+    	<input class="submit-message-button" type="submit" value="Send Message">
+    </div>
+  </form>
+</div>

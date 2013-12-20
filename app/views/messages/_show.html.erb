@@ -4,15 +4,15 @@
   <% friend = them %>
 <% end %>
 <li>
-  <div class="user-img">
-    <%= image_tag friend.profile.profile_img.url(:small) %>
-  </div>
-  <div class="user-name">
-    <a href="<%= user_profile_url(friend) %>">
-      <%= friend.name %>
-    </a>
-  </div>
-  <div class="message-body">
-    <%= message.body %>
+  <div class="group">
+    <div class="message-user-img">
+      <%= image_tag friend.profile.profile_img.url(:small) %>
+    </div>
+    <div class="message-body">
+      <a href="<%= user_profile_url(friend) %>">
+        <%= friend.name %>: &nbsp;
+      </a>
+      <%= message.body %>
+    </div>
   </div>
 </li>

@@ -7,7 +7,9 @@
     </div>
     <div class="status-content">
       <a href="<%= user_profile_url(owner) %>">
-        <%= owner.name %>
+        <strong>
+          <%= owner.name %>
+        </strong>
       </a>
       <% unless status.owner_id == status.wall_user_id %>
         <% about_user = User.find(status.wall_user_id) %>

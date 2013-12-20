@@ -1,7 +1,10 @@
-<h1><%= "Conversation with #{them.name}: "%></h1>
+<div class="conversations">
+<h2><%= "Conversation with #{them.name}: "%></h2>
 <ul class="message-list">
   <% thread.messages.order("messages.created_at").each do |message| %>
-    <%= render partial: "messages/show", locals: {message: message} %>
+    <%= render partial: "messages/show", locals: {message: message, them: them} %>
   <% end %>
 </ul>
+<br>
 <%= render partial: "messages/form", locals: { recipient: them} %>
+</div>

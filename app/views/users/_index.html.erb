@@ -5,41 +5,11 @@
 
 <div class="user-list">
   <% unless users.empty? %>
-    <h1>Users</h1>
+    <h2>Users</h2>
     <% users.each do |user| %>
-      <div class="user group">
-        <br>
-        <%= image_tag user.profile.profile_img.url(:small) %>
-        <%= user.name %>
-        <br>
-        <% if pending_friends.include?(user) %>
-          <% friendship = Friendship.find_pair(current_user, user) %>
-          <form class="friend-button" action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
-            <input
-              name="authenticity_token"
-              type="hidden"
-              value="<%= form_authenticity_token %>">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Pending: Cancel Request">
-          </form>
-        <% else %>
-          <form class="friend-button" action="<%= user_friendship_url(user) %>" data-remote="true" method="post">
-            <input
-              name="authenticity_token"
-              type="hidden"
-              value="<%= form_authenticity_token %>">
-            <input type="submit" value="Friend Request">
-          </form>
-        <% end %>
-        <form class="friend-button" action="<%= new_message_url %>" data-remote="true" method="get">
-          <input
-            name="authenticity_token"
-            type="hidden"
-            value="<%= form_authenticity_token %>">
-          <input type="hidden" name="recipient_id" value="<%= user.id %>">
-          <input type="submit" value="Send Message">
-        </form>
-      <% end %>
-    </div>
+      <div class="user">
+        <%= render partial: "users/show_user", locals: {user: user, pending_friends: pending_friends} %>
+      </div>
+    <% end %>
   <% end %>
 </div>

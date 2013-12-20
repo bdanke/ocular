@@ -4,12 +4,11 @@
     type="hidden"
     value="<%= form_authenticity_token %>">
   <div class="comment-form group">
-    <div class="comment-img"></div>
-      <textarea class="comment-submit-data" name="comment[body]" placeholder="Write a comment..."></textarea>
-      <br>
-      <input type="hidden" name="comment[object_type]" value="<%= object.class.to_s %>">
-      <input type="hidden" name="comment[object_id]" value="<%= object.id %>">
-      <input type="hidden" name="user_id" value="<%= params[:user_id] %>">
-      <input class="submit-comment-button" type="submit" value="Post comment">
+    <textarea class="comment-submit-data" name="comment[body]" placeholder="Write a comment..."></textarea>
+    <br>
+    <input type="hidden" name="comment[object_type]" value="<%= object.class.to_s %>">
+    <input type="hidden" name="comment[object_id]" value="<%= object.id %>">
+    <input type="hidden" name="user_id" value="<%= params[:user_id] %>">
+    <input class="submit-comment-button" type="submit" value="Post comment">
   </div>
 </form>

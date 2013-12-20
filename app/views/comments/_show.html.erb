@@ -4,11 +4,13 @@
   <div class="comment-img">
     <%= image_tag profile.profile_img.url(:small) %>
   </div>
-  <div class="comment-body">
-    <%= link_to "#{owner.name}:", user_profile_url(owner) %>
-    <%= comment.body %>
-  </div>
-  <div class="like-links group">
-    <%= render partial: "likes/show", locals: { object: comment, object_type: "Comment"} %>
+  <div class="comment-content group">
+    <div class="comment-body">
+      <%= link_to "#{owner.name}:", user_profile_url(owner) %>
+      <%= comment.body %>
+    </div>
+    <div class="like-links group">
+      <%= render partial: "likes/show", locals: { object: comment, object_type: "Comment"} %>
+    </div>
   </div>
 </div>

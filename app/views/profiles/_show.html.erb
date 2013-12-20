@@ -5,22 +5,28 @@
   </div>
   <div class="about-list">
     <ul>
-      <li><h3><%= user.name %></h3></li>
-      <li>Birthday: &nbsp;<%= user.bday %></li>
-      <li>Location: &nbsp;<%= profile.location %></li>
-      <li>Employer: &nbsp;<%= profile.employer %></li>
-      <li>School: &nbsp;<%= profile.school %></li>
+      <li><h2><%= user.name %></h2></li>
+      <li><strong>Birthday:</strong> &nbsp;<%= user.bday %></li>
+      <% unless profile.location.nil? %>
+        <li><strong>Location:</strong> &nbsp;<%= profile.location %></li>
+      <% end %>
+      <% unless profile.employer.nil? %>
+        <li><strong>Employer:</strong> &nbsp;<%= profile.employer %></li>
+      <% end %>
+      <% unless profile.school.nil? %>
+        <li><strong>School:</strong> &nbsp;<%= profile.school %></li>
+      <% end %>
       <% if params[:user_id].to_i == current_user.id %>
       <li><a class="edit-profile-link" href="<%= edit_user_profile_url(current_user) %>" data-remote="true">Edit Your Profile</a></li>
       <% end %>
     </ul>
-  </div>
-  <div class="about-links">
-    <a href="<%= user_albums_url(user) %>" data-remote="true">Photos</a>
-    <% num_friends = user.friends.count %>
-    <% unless num_friends == 0 %>
-      <a href="<%= user_friends_url(user) %>" data-remote="true"><%= pluralize(num_friends, "Friend") %></a>
-    <% end %>
+    <div class="about-links">
+      <a href="<%= user_albums_url(user) %>" data-remote="true">Photos</a>
+      <% num_friends = user.friends.count %>
+      <% unless num_friends == 0 %>
+        <a href="<%= user_friends_url(user) %>" data-remote="true"><%= pluralize(num_friends, "Friend") %></a>
+      <% end %>
+    </div>
   </div>
 </div>
 <div class="status-list">

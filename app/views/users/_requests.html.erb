@@ -1,42 +1,12 @@
 <% pending_request_friends = current_user.pending_request_friends %>
 
-<% unless pending_request_friends.empty? %>
 <div class="user-list">
-    <h3>Pending Friend Requests</hr>
-    <% pending_request_friends.each do |pending_request_friend| %>
-      <% friendship = Friendship.find_pair(current_user, pending_request_friend) %>
-      <br>
-      <%= pending_request_friend.name %>
-      <br>
-
-      <form class="friend-button" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
-        <input
-          name="authenticity_token"
-          type="hidden"
-          value="<%= form_authenticity_token %>">
-        <input type="hidden" name="_method" value="PUT">
-        <input type="submit" value="Accept Friend Request">
-      </form>
-
-      <form class="friend-button" action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
-        <input
-          name="authenticity_token"
-          type="hidden"
-          value="<%= form_authenticity_token %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete Friend Request">
-      </form>
-
-      <form class="friend-button" action="<%= new_message_url %>" data-remote="true" method="get">
-        <input
-          name="authenticity_token"
-          type="hidden"
-          value="<%= form_authenticity_token %>">
-        <input type="hidden" name="recipient_id" value="<%= pending_request_friend.id %>">
-        <input type="submit" value="Send Message">
-      </form>
-    <% end %>
+  <% unless pending_request_friends.empty? %>
+      <h2>Pending Friend Requests</h2>
+      <% pending_request_friends.each do |pending_request_friend| %>
+        <%= render partial: "users/show_request", locals: {pending_request_friend: pending_request_friend} %>
+      <% end %>
+  <% else %>
+    <h2>No Friend Requests at this time.</h2>
+  <% end %>
 </div>
-<% else %>
-  <h3>No Friend Requests at this time.</h3>
-<% end %>

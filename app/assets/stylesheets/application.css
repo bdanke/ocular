@@ -30,6 +30,19 @@ h1 {
   font-size: 45px;
 }
 
+h2 {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
 input {
   width: 150px;
   height: 30px;
@@ -37,4 +50,8 @@ input {
 
 ul, li {
   list-style: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

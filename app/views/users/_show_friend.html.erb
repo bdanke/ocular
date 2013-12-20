@@ -1,0 +1,37 @@
+<div class="group">
+  <a href="<%= user_profile_url(friend) %>">
+    <strong><%= friend.name %></strong>
+  </a>
+</div>
+<div class="user-img">
+  <%= image_tag friend.profile.profile_img.url(:small) %>
+</div>
+<div class="user-info">
+  <% if user == current_user %>
+    <% friendship = Friendship.find_pair(current_user, friend) %>
+    <form class="friend-button" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
+      <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Unfriend">
+    </form>
+  <% elsif params[:user_id] != current_user.id && !(current_user.friends.include?(friend) || current_user.pending_request_friends.include?(friend) || current_user.pending_friends.include?(friend)) %>
+    <form class="friend-button" action="<%= user_friendship_url(friend) %>" data-remote="true" method="post">
+      <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
+      <input type="submit" value="Friend Request">
+    </form>
+  <% end %>
+  <form class="friend-button" action="<%= new_message_url %>" data-remote="true" method="get">
+    <input
+      name="authenticity_token"
+      type="hidden"
+      value="<%= form_authenticity_token %>">
+    <input type="hidden" name="recipient_id" value="<%= friend.id %>">
+    <input type="submit" value="Send Message">
+  </form>
+</div>

@@ -45,7 +45,7 @@ header {
 .signin {
   float: right;
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .signin-data {
@@ -196,12 +196,26 @@ header {
 // PROFILE STYLING
 
 .about-content {
-  width: 505px;
+  width: 660px;
   margin-left: 70px;
+  margin-bottom: 20px;
 }
 
 .about-img, .about-list {
   float: left;
+}
+
+.about-list {
+  margin-left: 20px;
+}
+
+.about-links {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.about-links a {
+  margin-right: 30px;
 }
 
 // NEWSFEEDS STYLING
@@ -221,22 +235,25 @@ header {
 
 .status-submit-button {
   float: right;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
 
 // USERS INDEX
 
 .user-list {
-  width: 800px;
   min-height: 770px;
   float: left;
+  margin-left: 70px;
   background: lightblue;
 }
 
-.user {
-  margin-left: 40px;
-  margin-bottom: 20px;
-  font-size: 40px;
-}
+//.user {
+//  margin-left: 40px;
+//  margin-bottom: 20px;
+//  font-size: 40px;
+//}
 
 .user > form {
   margin-right: 20px;
@@ -247,12 +264,14 @@ header {
 // STATUS SHOW PARTIAL
 
 .status {
-  width: 505px;
+  width: 470px;
   margin-left: 140px;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding-top: 20px;
+  padding: 20px 17px 20px 17px;
   border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  background: lightgrey;
 }
 
 .status-user-img {
@@ -278,22 +297,25 @@ header {
 }
 
 .comment-data {
-  background: lightblue;
+  margin-left: 30px;
 }
 
 // COMMENT FORM
 
 .comment-form {
-  width: 505px;
+  width: 440px;
 }
 
 .comment-submit-data {
-  width: 500px;
-  max-width: 500px;
+  width: 440px;
+  max-width: 440px;
 }
 
 .submit-comment-button {
   float: right;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
 
 // COMMENT SHOW PARTIAL
@@ -302,8 +324,17 @@ header {
   width: 505px;
 }
 
+.comment-img {
+  float: left;
+}
+
+.comment-content {
+  float: left;
+  padding-left: 20px;
+}
+
 .comment-body {
-  width: 500px;
+  width: 370px;
   background: white;
 }
 
@@ -335,6 +366,9 @@ header {
   margin-top: 5px;
   margin-right: 5px;
   float: right;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
 
 .photo-upload-form > form > input[type="file"] {
@@ -343,6 +377,9 @@ header {
 
 .album-button {
   float: right;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
 
 .albums > ul > li {
@@ -376,4 +413,92 @@ header {
 
 .photo .like-links {
   float: none;
+}
+
+// USERS/FRIENDS STYLING
+
+.friends-list {
+  margin-left: 70px;
+}
+
+.user {
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 10px 0px 10px;
+  margin: 10px;
+  float: left;
+}
+
+.user-img {
+  margin-top: 20px;
+  float: left;
+}
+
+.user-info {
+  float: left;
+  margin-left: 10px;
+}
+
+.friend-button {
+  margin: 10px 0px 10px 0px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
+}
+
+// MESSAGE INDEX STYLING
+
+.conversations {
+  margin-left: 70px;
+}
+
+.messaged-friends-list li {
+  display: block;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  margin: 10px;
+  float: left;
+}
+
+.user-message-img {
+  float: left;
+}
+
+.user-message-info {
+  margin-top: 15px;
+  margin-left: 10px;
+  float: left;
+}
+
+// MESSAGE THREAD SHOW STYLING
+
+.message-user-img {
+  float: left;
+}
+
+.message-body {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 5px;
+  background: white;
+  float: left;
+}
+
+// MESSAGE FORM STYLING
+
+.message-form {
+  width: 440px;
+}
+
+.message-submit-data {
+  width: 440px;
+  max-width: 440px;
+}
+
+.submit-message-button {
+  float: right;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
