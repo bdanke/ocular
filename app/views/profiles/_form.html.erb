@@ -14,36 +14,36 @@
       value="<%= form_authenticity_token %>">
 
       <div class="profile-data group">
-        <div class="school">
+        <div class="profile-input">
           <label>School:
             <br>
             <input class="profile-text-input" type="text" name="profile[school]" value="<%= profile.school %>">
           </label>
         </div>
-        <div class="employer">
+        <div class="profile-input">
           <label>Employer:
             <br>
             <input class="profile-text-input" type="text" name="profile[employer]" value="<%= profile.employer %>">
           </label>
         </div>
-        <div class="location">
+        <div class="profile-input">
           <label>Location:
             <br>
             <input class="profile-text-input" type="text" name="profile[location]" value="<%= profile.location %>">
           </label>
         </div>
-        <div class="image">
+        <div class="profile-input">
           <label>Profile Image:
             <br>
-            <input type="file" name="profile[profile_img]">
+            <input class="profile-img-input" type="file" name="profile[profile_img]">
           </label>
         </div>
       </div>
       <% if method == "post" %>
-        <input type="submit" value="<%= button_text %>">
+        <input class="submit-profile-button" type="submit" value="<%= button_text %>">
       <% elsif method == "edit" %>
         <input type="hidden" name="_method" value="PUT">
-        <input type="submit" value="<%= button_text %>">
+        <input class="submit-profile-button" type="submit" value="<%= button_text %>">
       <% end %>
   </form>
 </div>

@@ -218,6 +218,12 @@ header {
   margin-right: 30px;
 }
 
+// PROFILE FORM STYLING
+
+.profile-form-container {
+  margin-left: 70px;
+}
+
 // NEWSFEEDS STYLING
 
 .status-form {
@@ -498,6 +504,26 @@ header {
 
 .submit-message-button {
   float: right;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
+}
+
+// PROFILE FORM STYLING
+
+.profile-form-container {
+  margin-left: 70px;
+}
+
+.profile-input {
+  margin: 10px;
+}
+
+.profile-img-input {
+  width: 200px;
+}
+
+.submit-profile-button {
   border: 1px solid white;
   border-radius: 4px;
   background: #77F2BB;

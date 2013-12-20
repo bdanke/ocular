@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
   def edit
     @profile = current_user.profile
     if request.xhr?
-      render partial: "profiles/form", locals: {profile: @profile, method: "edit"}
+      render partial: "profiles/edit", locals: {profile: @profile}
     else
      render :edit
    end
