@@ -22,15 +22,16 @@ class AlbumsController < ApplicationController
   def create
     album = Album.new(params[:album])
     album.owner_id = current_user.id
-    unless album.photo_album_links.empty?
+    unless album.photo_ids.empty?
       album.save!
       if request.xhr?
         render partial: "albums/index", locals: {user: current_user, photo: current_user.photos.first}
       else
         redirect_to user_albums_url(current_user)
       end
+    else
+      redirect_to user_albums_url(current_user)
     end
-    redirect_to user_albums_url(current_user)
   end
 
   def index

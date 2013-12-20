@@ -365,9 +365,19 @@ header {
 
 // ALBUMS STYLING
 
+.photos {
+  float: left;
+  margin-left: 70px;
+  background: lightblue;
+}
+
 .album-header {
   margin-right: 40px;
   margin-left: 40px;
+}
+
+.photo-container {
+  float: left;
 }
 
 .photo-upload-form {

@@ -3,9 +3,7 @@
     <div class="photo-upload-form">
       <%= render partial: "photos/form" %>
     </div>
-    <div class="album-button">
-      <%= button_to "Create Album", new_album_url, method: :get, "data-remote" => "true" %>
-    </div>
+    <%= button_to "Create Album", new_album_url, method: :get, "data-remote" => "true", class: "album-button" %>
   <% end %>
 </div>
 <div class="albums">

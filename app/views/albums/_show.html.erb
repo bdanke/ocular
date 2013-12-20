@@ -1,18 +1,18 @@
 <div class="photos">
-  <h3><%= album.title %></h3>
+  <h2><%= album.title %></h2>
   <br>
   <ul>
     <% album.photos.each do |photo| %>
-      <li>
+      <div class="photo-container">
         <a href="<%= user_photo_url(params[:user_id], photo) %>" data-remote="true">
-        <figure>
-          <% if photo.caption %>
-            <figcaption><%= photo.caption %></figcaption>
-          <% end %>
-          <%= image_tag photo.img.url %>
-        </figure>
-      </a>
-      </li>
+          <figure>
+            <%= image_tag photo.img.url %>
+            <% if photo.caption %>
+              <figcaption><%= photo.caption %></figcaption>
+            <% end %>
+          </figure>
+        </a>
+      </div>
     <% end %>
   </ul>
 </div>
