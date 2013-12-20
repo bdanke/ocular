@@ -59,7 +59,7 @@ $(document).ready(function(event) {
     $(".middle-content").html(data);
   });
 
-  $(".middle-content").on("ajax:success", ".friend-button", function(event, data) {
+  $(".middle-content").on("ajax:success", ".friend-form", function(event, data) {
     $(".middle-content").html(data);
   });
 

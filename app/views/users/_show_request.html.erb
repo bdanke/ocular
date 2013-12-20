@@ -8,7 +8,7 @@
   <%= image_tag pending_request_friend.profile.profile_img.url(:small) %>
 </div>
 <div class="user-info">
-  <form action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
+  <form class="friend-form" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
     <input
       name="authenticity_token"
       type="hidden"
@@ -17,7 +17,7 @@
     <input class="friend-button" type="submit" value="Accept Request">
   </form>
 
-  <form action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
+  <form class="friend-form" action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
     <input
       name="authenticity_token"
       type="hidden"
@@ -26,7 +26,7 @@
     <input class="friend-button" type="submit" value="Delete Request">
   </form>
 
-  <form action="<%= new_message_url %>" data-remote="true" method="get">
+  <form class="friend-form" action="<%= new_message_url %>" data-remote="true" method="get">
     <input
       name="authenticity_token"
       type="hidden"

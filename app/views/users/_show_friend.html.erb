@@ -9,7 +9,7 @@
 <div class="user-info">
   <% if user == current_user %>
     <% friendship = Friendship.find_pair(current_user, friend) %>
-    <form action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
+    <form class="friend-form" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
       <input
         name="authenticity_token"
         type="hidden"
@@ -18,7 +18,7 @@
       <input class="friend-button" type="submit" value="Unfriend">
     </form>
   <% elsif params[:user_id] != current_user.id && !(current_user.friends.include?(friend) || current_user.pending_request_friends.include?(friend) || current_user.pending_friends.include?(friend)) %>
-    <form action="<%= user_friendship_url(friend) %>" data-remote="true" method="post">
+    <form class="friend-form" action="<%= user_friendship_url(friend) %>" data-remote="true" method="post">
       <input
         name="authenticity_token"
         type="hidden"
@@ -26,7 +26,7 @@
       <input class="friend-button" type="submit" value="Friend Request">
     </form>
   <% end %>
-  <form action="<%= new_message_url %>" data-remote="true" method="get">
+  <form class="friend-form" action="<%= new_message_url %>" data-remote="true" method="get">
     <input
       name="authenticity_token"
       type="hidden"

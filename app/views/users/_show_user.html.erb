@@ -9,7 +9,7 @@
 <div class="user-info">
   <% if pending_friends.include?(user) %>
     <% friendship = Friendship.find_pair(current_user, user) %>
-    <form action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
+    <form class="friend-form" action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
       <input
         name="authenticity_token"
         type="hidden"
@@ -18,7 +18,7 @@
       <input class="friend-button" type="submit" value="Pending: Cancel">
     </form>
   <% else %>
-    <form action="<%= user_friendship_url(user) %>" data-remote="true" method="post">
+    <form class="friend-form" action="<%= user_friendship_url(user) %>" data-remote="true" method="post">
       <input
         name="authenticity_token"
         type="hidden"
@@ -26,7 +26,7 @@
       <input class="friend-button" type="submit" value="Friend Request">
     </form>
   <% end %>
-  <form action="<%= new_message_url %>" data-remote="true" method="get">
+  <form class="friend-form" action="<%= new_message_url %>" data-remote="true" method="get">
     <input
       name="authenticity_token"
       type="hidden"
