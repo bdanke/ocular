@@ -64,6 +64,9 @@ header {
   margin-top: 22px;
   height: 40px;
   width: 80px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
 
 .main {
@@ -110,6 +113,10 @@ header {
   float: left;
 }
 
+.bday {
+  width: 180px;
+}
+
 .signup-text-input {
   width: 150px;
   height: 30px;
@@ -118,6 +125,9 @@ header {
 .signup-button {
   height: 40px;
   width: 120px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: #77F2BB;
 }
 
 // SIGNED IN HEADER
