@@ -15,7 +15,7 @@
         type="hidden"
         value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Pending: Cancel Request">
+      <input type="submit" value="Pending: Cancel">
     </form>
   <% else %>
     <form class="friend-button" action="<%= user_friendship_url(user) %>" data-remote="true" method="post">
