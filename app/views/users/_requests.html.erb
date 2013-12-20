@@ -4,7 +4,9 @@
   <% unless pending_request_friends.empty? %>
       <h2>Pending Friend Requests</h2>
       <% pending_request_friends.each do |pending_request_friend| %>
-        <%= render partial: "users/show_request", locals: {pending_request_friend: pending_request_friend} %>
+        <div class="user">
+          <%= render partial: "users/show_request", locals: {pending_request_friend: pending_request_friend} %>
+        </div>
       <% end %>
   <% else %>
     <h2>No Friend Requests at this time.</h2>

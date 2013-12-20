@@ -8,30 +8,30 @@
   <%= image_tag pending_request_friend.profile.profile_img.url(:small) %>
 </div>
 <div class="user-info">
-  <form class="friend-button" action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
+  <form action="<%= friendship_url(friendship) %>" data-remote="true" method="post">
     <input
       name="authenticity_token"
       type="hidden"
       value="<%= form_authenticity_token %>">
     <input type="hidden" name="_method" value="PUT">
-    <input type="submit" value="Accept Friend Request">
+    <input class="friend-button" type="submit" value="Accept Request">
   </form>
 
-  <form class="friend-button" action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
+  <form action="<%= deny_friendship_url(friendship) %>" data-remote="true" method="post">
     <input
       name="authenticity_token"
       type="hidden"
       value="<%= form_authenticity_token %>">
     <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Friend Request">
+    <input class="friend-button" type="submit" value="Delete Request">
   </form>
 
-  <form class="friend-button" action="<%= new_message_url %>" data-remote="true" method="get">
+  <form action="<%= new_message_url %>" data-remote="true" method="get">
     <input
       name="authenticity_token"
       type="hidden"
       value="<%= form_authenticity_token %>">
     <input type="hidden" name="recipient_id" value="<%= pending_request_friend.id %>">
-    <input type="submit" value="Send Message">
+    <input class="friend-button" type="submit" value="Send Message">
   </form>
 </div>
