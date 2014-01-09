@@ -1,13 +1,13 @@
 <header>
   <div class="header-wrapper">
-    <div class="logo">LOOKBOOK</div>
+    <div class="logo">OCULAR</div>
     <%= render partial: "sessions/new" %>
   </div>
 </header>
 
 <div class="main">
   <div class="about">
-    <h1>LOOKBOOK</h1>
+    <h1>OCULAR</h1>
     <p>Is a facebook clone made by Brandon Danker for
     the final project at App Academy. It has the following features:
     </p>
@@ -17,9 +17,22 @@
       <li>Profile Page with a Wall</li>
       <li>Albums and Photos</li>
       <li>Tagging Friends in Photos</li>
-      <li>Notification of Taggings by Friends</li>
+      <li>Notifications</li>
       <li>Messages</li>
     </ul>
+
+    <form action="<%= session_url %>" method="post">
+      <input
+         name="authenticity_token"
+         type="hidden"
+         value="<%= form_authenticity_token %>">
+      <input type="hidden" name="user[email]" value="bd@gmail.com">
+      <input type="hidden" name="user[password]" value="asdfgh">
+      <input class="signin-button" style="width: auto" type="submit" value="Sign In As Me!">
+    </form>
+
+
+
     <% if flash[:errors] && !flash[:errors].empty? %>
     <br>
     <ul>
