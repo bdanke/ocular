@@ -1,14 +1,13 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :fname, :lname, :bday, :gender, :password, :profile_id
+  attr_accessible :email, :fname, :lname, :gender, :password, :profile_id
   attr_reader :password
   validates :email, :fname, :lname, presence: true
-  validates :bday, :gender, :session_token, presence: true
+  validates :gender, :session_token, presence: true
   validates :password_digest, presence: { message: "Password can't be blank!" }
   validates :email, uniqueness: true
   validates :email, email: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :gender, inclusion: { in: %w(m f) }
-  validates_date :bday
 
   after_initialize :ensure_session_token
 
