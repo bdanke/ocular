@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
     friends = self.friends
     unless friends.empty?
       friends.each do |friend|
-        select_array << "user_id = #{friend.id}"
+        select_array << " user_id = #{friend.id}"
       end
       select_query = select_array.join(" OR")
       query = <<-END
