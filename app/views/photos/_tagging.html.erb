@@ -32,7 +32,7 @@
   <% unless friends.empty? %>
     <% friends.each do |friend| %>
       <% unless tagged_users.include?(friend) %>
-        <form class="tag-form" action="<%= user_photo_tags_url(@user, photo) %>" data-remote="true" method="post">
+        <form class="tag-form" action="<%= user_photo_tags_url(user, photo) %>" data-remote="true" method="post">
           <input
             name="authenticity_token"
             type="hidden"
