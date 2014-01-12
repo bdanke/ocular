@@ -453,8 +453,14 @@ header {
 
 // PHOTO SHOW STYLING
 
-.photo .like-links {
-  float: none;
+.photo {
+  float: left;
+  margin-left: 70px;
+  background: lightblue;
+}
+
+.photo-like-links {
+  float: left;
 }
 
 // USERS/FRIENDS STYLING

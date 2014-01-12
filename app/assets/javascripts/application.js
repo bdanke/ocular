@@ -49,17 +49,9 @@ $(document).ready(function(event) {
     $(".middle-content").html(data);
   });
 
-  $(".middle-content").on("click", ".like-links a", function(event, data) {
-    event.preventDefault();
-  });
-
   $(".middle-content").on("ajax:success", ".like-links a", function(event, data) {
     event.preventDefault();
     $(this).closest(".like-links").html(data);
-  });
-
-  $(".middle-content").on("click", ".photo-like-links a", function(event, data) {
-    event.preventDefault();
   });
 
   $(".middle-content").on("ajax:success", ".photo-like-links a", function(event, data) {
