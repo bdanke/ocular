@@ -3,6 +3,8 @@
   <% like = Like.find_by_data(current_user.id, "Status", object.id) %>
 <% elsif object_type == "Comment" %>
   <% like = Like.find_by_data(current_user.id, "Comment", object.id) %>
+<% elsif object_type == "Photo" %>
+  <% like = Like.find_by_data(current_user.id, "Photo", object.id) %>
 <% end %>
 <ul>
   <li>

@@ -54,6 +54,11 @@ $(document).ready(function(event) {
     $(this).closest(".like-links").html(data);
   });
 
+  $(".middle-content").on("ajax:success", ".photo-like-links a", function(event, data) {
+    event.preventDefault();
+    $(this).closest(".photo-like-links").html(data);
+  });  
+
   $(".album-button").on("ajax:success", function(event, data) {
     event.preventDefault();
     $(".middle-content").html(data);
