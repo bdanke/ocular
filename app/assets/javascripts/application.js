@@ -23,25 +23,8 @@ $(document).pjax(".photos a", ".middle-content")
 $(document).pjax(".albums a", ".middle-content")
 
 $(document).ready(function(event) {
-//   $(".signed-in-header-links").on("ajax:success", "a", function(event, data) {
-//     var href = $(this).attr("href");
-//     history.pushState(null, null, href);
-//     $(".middle-content").html(data);
-//   });
-//
-//   $(".left-sidebar").on("ajax:success", "a", function(event, data) {
-//     var href = $(this).attr("href");
-//     history.pushState(null, null, href);
-//     $(".middle-content").html(data);
-//   });
-//
-//   $(".middle-content").on("ajax:success", ".messaged-friends-list a", function(event, data) {
-//     var href = $(this).attr("href");
-//     history.pushState(null, null, href);
-//     $(".middle-content").html(data);
-//   })
-
   $(".middle-content").on("ajax:success", ".status-form", function(event, data) {
+    event.preventDefault();
     var $form = $(this);
     console.log("HERE!");
     $(".status-list").prepend(data);
@@ -49,6 +32,7 @@ $(document).ready(function(event) {
   });
 
   $(".middle-content").on("ajax:success", ".comment-form", function(event, data) {
+    event.preventDefault();
     var $form = $(this);
     var $list = $form.parent().children(".comment-list");
     $list.append(data);
@@ -56,44 +40,32 @@ $(document).ready(function(event) {
   });
 
   $(".middle-content").on("ajax:success", ".message-form", function(event, data) {
+    event.preventDefault();
     $(".middle-content").html(data);
   });
 
   $(".middle-content").on("ajax:success", ".friend-form", function(event, data) {
+    event.preventDefault();
     $(".middle-content").html(data);
   });
 
   $(".middle-content").on("ajax:success", ".like-links a", function(event, data) {
+    event.preventDefault();
     $(this).closest(".like-links").html(data);
   });
-//
-//   $(".middle-content").on("ajax:success", ".about-links a", function(event, data) {
-//     var href = $(this).attr("href");
-//     history.pushState(null, null, href);
-//     $(".middle-content").html(data);
-//   });
-//
-//   $(".middle-content").on("ajax:success", ".photos a", function(event, data) {
-//     var href = $(this).attr("href");
-//     history.pushState(null, null, href);
-//     $(".middle-content").html(data);
-//   });
-//
-//   $(".middle-content").on("ajax:success", ".albums a", function(event, data) {
-//     var href = $(this).attr("href");
-//     history.pushState(null, null, href);
-//     $(".middle-content").html(data);
-//   });
 
   $(".album-button").on("ajax:success", function(event, data) {
+    event.preventDefault();
     $(".middle-content").html(data);
   });
 
   $(".middle-content").on("ajax:success", ".photo-form", function(event, data) {
+    event.preventDefault();
     $(".middle-content").html(data);
   });
 
   $(".middle-content").on("ajax:success", ".edit-profile-link", function(event, data) {
+    event.preventDefault();
     $(".middle-content").html(data);
   });
 });
