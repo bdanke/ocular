@@ -4,68 +4,15 @@
   <% end %>
   <br>
   <%= image_tag photo.img.url %>
-  <% tags = photo.tags %>
-  <% self_tag = tags.where("user_id = ?", current_user.id).first %>
-  <% tagged_users = tags.map { |tag| tag.tagged_user } %>
+  
   <div class="photo-like-links group">
     <%= render partial: "likes/show", locals: {object: photo, object_type: "Photo"} %>
   </div>
-  <% unless tags.empty? %>
-    <% unless self_tag.nil? %>
-      <br>
-      <form class="tag-form" action="<%= tag_url(self_tag) %>" data-remote="true" method="post">
-        <input
-          name="authenticity_token"
-          type="hidden"
-          value="<%= form_authenticity_token %>">
-        <input type="hidden" name="tagged_user_id" value="<%= current_user.id %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <input class="friend-button" type="submit" value="<%= "Remove Tag" %>">
-      </form>
-
-    <% end %>
-    <br>
-  <% end %>
-  <% if user == current_user %>
-    <% friends = current_user.friends %>
-    <% if self_tag.nil? %>
-      <form class="tag-form" action="<%= user_photo_tags_url(user, photo) %>" data-remote="true" method="post">
-        <input
-          name="authenticity_token"
-          type="hidden"
-          value="<%= form_authenticity_token %>">
-        <input type="hidden" name="tagged_user_id" value="<%= current_user.id %>">
-        <input class="friend-button" type="submit" value="<%= "Tag Yourself!" %>">
-      </form>
-    <% end %>
-    <% unless friends.empty? %>
-      <% friends.each do |friend| %>
-        <% unless tagged_users.include?(friend) %>
-          <form class="tag-form" action="<%= user_photo_tags_url(@user, photo) %>" data-remote="true" method="post">
-            <input
-              name="authenticity_token"
-              type="hidden"
-              value="<%= form_authenticity_token %>">
-            <input type="hidden" name="tagged_user_id" value="<%= friend.id %>">
-            <input class="friend-button" type="submit" value="<%= "Tag " + friend.name + "!" %>">
-          </form>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-  <br>
-  <% unless tagged_users.empty? %>
-    <h3>Tagged in this photo:</h3>
-    <ul class="tagged-list">
-      <% tagged_users.each do |user| %>
-        <li class="tag-item">
-          <a href="<%= user_profile_url(user) %>">
-            <%= user.name %>
-          </a>
-        <li>
-      <% end %>
-    </ul>
-  <% end %>
+  
+  <div class="tagging">
+    <%= render partial: "photos/tagging", locals: { photo: photo } %>
+  </div>
+  
   <br>
   <div class="comment-data">
     <h3>Comments</h3>

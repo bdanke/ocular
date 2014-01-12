@@ -13,9 +13,17 @@ class TagsController < ApplicationController
       tag.owner_id = current_user.id
       tag.save!
       Notification.create({ user_id: current_user.id, notifiable_id: tag.id, notifiable_type: "Tag"})
-      redirect_to user_photo_url(params[:user_id], params[:photo_id])
+      if request.xhr?
+        render partial: "photos/tagging", locals: {user: photo_owner, photo: photo }
+      else
+        redirect_to user_photo_url(params[:user_id], params[:photo_id])
+      end
     else
-      redirect_to :back
+      if request.xhr?
+        render partial: "photos/tagging", locals: {user: photo_owner, photo: photo }
+      else
+        redirect_to :back
+      end
     end
 	end
 
@@ -26,13 +34,13 @@ class TagsController < ApplicationController
     if tag.user_id == current_user.id
       tag.destroy
       if request.xhr?
-        render partial: "photos/show", locals: {user: owner, photo: photo}
+        render partial: "photos/tagging", locals: {user: owner, photo: photo}
       else
         redirect_to :back
       end
     else
       if request.xhr?
-        render partial: "photos/show", locals: {user: owner, photo: photo}
+        render partial: "photos/tagging", locals: {user: owner, photo: photo}
       else
         redirect_to :back
       end

@@ -31,6 +31,11 @@ $(document).ready(function(event) {
     $form[0].reset();
   });
 
+  $(".middle-content").on("ajax:success", ".tag-form", function(event, data) {
+    event.preventDefault();
+    $(".tagging").html(data);
+  })
+
   $(".middle-content").on("ajax:success", ".comment-form", function(event, data) {
     event.preventDefault();
     var $form = $(this);
