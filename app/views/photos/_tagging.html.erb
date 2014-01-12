@@ -2,6 +2,19 @@
 <% self_tag = tags.where("user_id = ?", current_user.id).first %>
 <% tagged_users = tags.map { |tag| tag.tagged_user } %>
 
+<% unless tagged_users.empty? %>
+  <h3>Tagged in this photo:</h3>
+  <ul class="tagged-list">
+    <% tagged_users.each do |user| %>
+      <li class="tag-item">
+        <a href="<%= user_profile_url(user) %>">
+          <%= user.name %>
+        </a>
+      <li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div class="group">
   <% unless tags.empty? %>
     <% unless self_tag.nil? %>
@@ -46,15 +59,3 @@
     <% end %>
   <% end %>
 </div>
-<% unless tagged_users.empty? %>
-  <h3>Tagged in this photo:</h3>
-  <ul class="tagged-list">
-    <% tagged_users.each do |user| %>
-      <li class="tag-item">
-        <a href="<%= user_profile_url(user) %>">
-          <%= user.name %>
-        </a>
-      <li>
-    <% end %>
-  </ul>
-<% end %>
