@@ -2,6 +2,7 @@
 <% self_tag = tags.where("user_id = ?", current_user.id).first %>
 <% tagged_users = tags.map { |tag| tag.tagged_user } %>
 
+<br>
 <% unless tagged_users.empty? %>
   <h3>Tagged in this photo:</h3>
   <ul class="tagged-list">
