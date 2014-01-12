@@ -6,7 +6,7 @@ class TagsController < ApplicationController
     friend = User.find(params[:tagged_user_id])
     photo = Photo.find(params[:photo_id])
     photo_owner = User.find(photo.owner_id)
-    if friends.include?(friend) && (friends.include?(photo_owner) || photo_owner == current_user)
+    if (friends.include?(friend) || friend == current_user) && (friends.include?(photo_owner) || photo_owner == current_user)
       tag = Tag.new()
       tag.photo_id = photo.id
       tag.user_id = friend.id
