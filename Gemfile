@@ -21,6 +21,11 @@ group :development do
   gem 'binding_of_caller'
 end
 
+group :test do
+	gem 'rspec-rails'
+	gem 'shoulda-matchers'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
