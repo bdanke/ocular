@@ -52,7 +52,7 @@ class FriendshipsController < ApplicationController
   def cancel
     Friendship.find(params[:id]).destroy
     if request.xhr?
-      render partial: "users/index"
+      render partial: "users/index", locals: { users: User.all }
     else
       redirect_to :back
     end
