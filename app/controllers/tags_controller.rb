@@ -29,6 +29,8 @@ class TagsController < ApplicationController
 
   def destroy
     tag = Tag.find(params[:id])
+    notification = Notification.where("notifiable_id = ? AND notifiable_type LIKE 'Tag'", friendship.id).first
+    notification.destroy
     photo = Photo.find(tag.photo_id)
     owner = photo.user
     if tag.user_id == current_user.id

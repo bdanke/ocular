@@ -29,7 +29,6 @@ class MessagesController < ApplicationController
     @thread = MessageThread.find_by_users(current_user, recipient)
     if @thread
       message.thread_id = @thread.id
-      # message.seen = "F"
       message.save!
       if request.xhr?
         render partial: "message_threads/show", locals: {thread: @thread, them: recipient}

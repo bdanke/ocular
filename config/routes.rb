@@ -24,4 +24,5 @@ Ocular::Application.routes.draw do
   root to: "root#root"
   match "users/:user_id/friends" => "users#friends", as: "user_friends"
   match "friendships/:id/deny" => "friendships#deny", as: "deny_friendship"
+  match "friendships/:id/cancel" => "friendships#cancel", as: "cancel_friendship"
 end
