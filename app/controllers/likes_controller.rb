@@ -19,7 +19,9 @@ class LikesController < ApplicationController
 
   def destroy
     like = Like.find(params[:like_id])
+    notification = Notification.where("notifiable_id = ? AND notifiable_type LIKE 'Like'", like.id)
     object = like.object_type.constantize.find(like.object_id)
+    notification.destroy
     like.destroy
 
     if request.xhr?
