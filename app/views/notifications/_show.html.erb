@@ -68,6 +68,10 @@
       <div class="notification">
         <%= owner.name + " liked your status." %>
       </div>
+    <% elsif status.owner_id == like.owner_id %>
+      <div class="notification">
+        <%= owner.name + " liked their status." %>
+      </div>
     <% else %>
       <% user = User.find(status.owner_id) %>
       <div class="notification">
@@ -80,6 +84,10 @@
       <div class="notification">
         <%= owner.name + " liked your comment." %>
       </div>
+    <% elsif comment.owner_id == like.owner_id %>
+      <div class="notification">
+        <%= owner.name + " liked their comment." %>
+      </div>      
     <% else %>
       <% user = User.find(comment.owner_id) %>
       <div class="notification">
@@ -92,6 +100,10 @@
       <div class="notification">
         <%= owner.name + " liked your " %><a href="<%= user_photo_url(current_user, photo) %>">photo</a>.
       </div>
+    <% elsif photo.owner_id == like.owner_id %>
+      <div class="notification">
+        <%= owner.name + " liked their photo." %>
+      </div>      
     <% else %>
       <% user = User.find(photo.owner_id) %>
       <div class="notification">
