@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
 
     if request.xhr?
       if thread
-        render partial: "message_threads/show", locals: {thread: thread, them: recipient}
+        render partial: "message_threads/show", locals: {thread: thread, them: @recipient}
       else
         render partial: "messages/form", locals: {recipient: @recipient}
       end
